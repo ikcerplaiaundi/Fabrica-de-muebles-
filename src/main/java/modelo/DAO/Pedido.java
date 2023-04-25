@@ -6,84 +6,94 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
+	//a list of products for send to a client
 	private int idPedido;
 	private double costo;
 	private Client client;
-	private ArrayList <Producto> productos = new <Producto> ArrayList();
-	//date for sql
-		private String pattern = "yyyy-MM-dd";
-		private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		private Date fechaEntrada;
-		//date 
-		public Date getFechaEntrada() {
-			return  fechaEntrada;
-		}
-		public String getStringFechaEntrada() {
-			return ""+simpleDateFormat.format(this.fechaEntrada);
-		}
+	private ArrayList<Producto> productos = new <Producto>ArrayList();
+	// date for sql
+	private String pattern = "yyyy-MM-dd";
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+	private Date fechaPedido;
 
-		public String getStringFechaEntrada(String patern) {
-			this.setPattern(patern);
-			return simpleDateFormat.format(this.fechaEntrada);
-		}
+	// date
+	public Date getFechaPedido() {
+		return fechaPedido;
+	}
 
-		public void setFechaEntrada(Date fechaEntrada) {
-			this.fechaEntrada = fechaEntrada;
-		}
+	public String getStringFechaPedido() {
+		return "" + simpleDateFormat.format(this.fechaPedido);
+	}
 
-		public void setFechaEntrada(String fechaEntrada) {
-			try {
-				this.fechaEntrada = (Date) simpleDateFormat.parse(fechaEntrada);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
+	public String getStringFechaPedido(String patern) {
+		this.setPattern(patern);
+		return simpleDateFormat.format(this.fechaPedido);
+	}
 
-		public String getPattern() {
-			return pattern;
-			
-		}
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
 
-		public void setPattern(String pattern) {
-			this.pattern = pattern;
-			String auxdate = getStringFechaEntrada();
-			this.simpleDateFormat=new SimpleDateFormat(pattern);
-			this.setFechaEntrada(auxdate);
+	public void setFechaPedido(String fechaPedido) {
+		try {
+			this.fechaPedido = (Date) simpleDateFormat.parse(fechaPedido);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+	}
 
+	public String getPattern() {
+		return pattern;
 
-		public SimpleDateFormat getSimpleDateFormat() {
-			return simpleDateFormat;
-		}
+	}
 
-		public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
-			this.simpleDateFormat = simpleDateFormat;
-		}
-		
-		
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+		String auxdate = getStringFechaPedido();
+		this.simpleDateFormat = new SimpleDateFormat(pattern);
+		this.setFechaPedido(auxdate);
+	}
+
+	public SimpleDateFormat getSimpleDateFormat() {
+		return simpleDateFormat;
+	}
+
+	public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
+		this.simpleDateFormat = simpleDateFormat;
+	}
+	
+	
+	//simple atribute
 	public int getIdPedido() {
 		return idPedido;
 	}
+
 	public void setIdPedido(int idPedido) {
 		this.idPedido = idPedido;
 	}
+
 	public double getCosto() {
 		return costo;
 	}
+
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
+
 	public Client getClient() {
 		return client;
 	}
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
 	public ArrayList<Producto> getProductos() {
 		return productos;
 	}
+
 	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
-	
+
 }
