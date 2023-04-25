@@ -2,18 +2,18 @@ package modelo.DAO;
 
 public class Client {
 	//who want buy something
-	private int intClient;
+	private int idClient;
 	private String NombreClient;
 	private String contactoClient;
 	private String dniClient;
 	private String direccionClient;
 	private Rol rolClient;
 	private String contraseñaClient;
-	public int getIntClient() {
-		return intClient;
+	public int getIdClient() {
+		return idClient;
 	}
-	public void setIntClient(int intClient) {
-		this.intClient = intClient;
+	public void setIdClient(int intClient) {
+		this.idClient = intClient;
 	}
 	public String getNombreClient() {
 		return NombreClient;

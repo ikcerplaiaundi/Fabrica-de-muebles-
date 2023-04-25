@@ -46,13 +46,15 @@ public class LogDrive extends HttpServlet {
 
 		String Mensage = "inserte el usuario y contraseña";
 		modelo.DAO.User user = new modelo.DAO.User();
-		
+		user.setIdLikeString(request.getParameter("userId"));
 		user.setNombre(request.getParameter("nombre"));
 		user.setContra(request.getParameter("contraseña"));
 		
 
 		modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
 		GDBB.abrirConexion();
+		
+		//check for clients
 		Boolean[] chek =GDBB.ChekUser(user,"clientes");
 		
 		
@@ -64,7 +66,10 @@ public class LogDrive extends HttpServlet {
 		}	
 		if (( chek[0])&&( chek[1])) {
 			modelo.DAO.Client client = new modelo.DAO.Client();
-			
+			client.setIdClient(user.getId());
+			client.setNombreClient(user.getNombre());
+			client.setContraseñaClient(user.getContra());
+			GDBB.pullCliente(client);
 			HttpSession session = request.getSession();
 			session.setAttribute("logedclient", user);
 			Mensage = "bien venido " + user.getNombre();
@@ -79,7 +84,32 @@ public class LogDrive extends HttpServlet {
 			request.getRequestDispatcher("log.jsp").forward(request, response);
 		}
 		
+		
+		
+		//check for employees
 		chek =GDBB.ChekUser(user,"empleados");
+		
+		if (( chek[0])&&( chek[1])) {
+			modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
+			empleado.setIdEmpleado(user.getId());
+			empleado.setNombreEmpleado(user.getNombre());
+			empleado.setContraseñaEmpleado(user.getContra());
+			GDBB.pullEmpleado(empleado);
+			HttpSession session = request.getSession();
+			session.setAttribute("logedclient", user);
+			Mensage = "bien venido " + user.getNombre();
+			// enviar datos
+			request.setAttribute("Mensage", Mensage);
+			// a que jsp?
+				response.sendRedirect("forRedirect");
+			} else {
+			// enviar datos
+			request.setAttribute("Mensage", Mensage);
+			// a que jsp?
+			request.getRequestDispatcher("log.jsp").forward(request, response);
+		}
+		
+		
 		GDBB.cerrarConexion();
 
 	}

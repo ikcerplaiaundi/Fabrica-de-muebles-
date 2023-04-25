@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import modelo.DAO.Client;
+import modelo.DAO.Empleado;
+
 
 
 public class GestorBDD extends Conexion{
@@ -36,6 +39,16 @@ public class GestorBDD extends Conexion{
 		}
 		
 		return Chek;
+	}
+
+	public void pullCliente(Client client) {
+		String selectUsuarios = "SELECT * FROM clientes WHERE Nombre= ?";
+		
+	}
+
+	public void pullEmpleado(Empleado empleado) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
