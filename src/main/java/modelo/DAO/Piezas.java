@@ -6,9 +6,9 @@ import java.util.Date;
 
 public class Piezas {
 	//tipe of elements what conform products
-	private int id;
-	private String nombre;
-	private int stock;
+	private int idPiezas;
+	private String nombrePiezas;
+	private int stockPiezas;
 	//date for sql
 	private String pattern = "yyyy-MM-dd";
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -59,23 +59,24 @@ public class Piezas {
 		this.simpleDateFormat = simpleDateFormat;
 	}
 	//simple atributes
-	public int getId() {
-		return id;
+	public int getIdPiezas() {
+		return idPiezas;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdPiezas(int idPiezas) {
+		this.idPiezas = idPiezas;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombrePiezas() {
+		return nombrePiezas;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombrePiezas(String nombrePiezas) {
+		this.nombrePiezas = nombrePiezas;
 	}
-	public int getStock() {
-		return stock;
+	public int getStockPiezas() {
+		return stockPiezas;
 	}
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setStockPiezas(int stockPiezas) {
+		this.stockPiezas = stockPiezas;
 	}
+	
 	
 }
