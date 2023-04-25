@@ -75,8 +75,10 @@ public class Piezas {
 	public int getStockPiezas() {
 		return stockPiezas;
 	}
-	public void setStockPiezas(int stockPiezas) {
-		this.stockPiezas = stockPiezas;
+	public boolean setStockPiezas(int stockPiezas) {
+		//stock cant be negative
+		if(stockPiezas <0) {return false;}
+		else {this.stockPiezas = stockPiezas; return true;}
 	}
 	public String getDecripcion() {
 		return decripcion;
