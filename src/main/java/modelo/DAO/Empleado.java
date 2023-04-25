@@ -1,7 +1,7 @@
 package modelo.DAO;
 
 public class Empleado {
-	//all emplollers need to be an post  and role
+	//all employers need to be an employ and role
 	private int idEmpleado;
 	private String nombreEmpleado;
 	private String puesto;

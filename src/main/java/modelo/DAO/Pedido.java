@@ -16,7 +16,7 @@ public class Pedido {
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	private Date fechaPedido;
 
-	// date
+	// date for sql get set
 	public Date getFechaPedido() {
 		return fechaPedido;
 	}
@@ -63,7 +63,7 @@ public class Pedido {
 	}
 	
 	
-	//simple atribute
+	//simple attribute get set
 	public int getIdPedido() {
 		return idPedido;
 	}

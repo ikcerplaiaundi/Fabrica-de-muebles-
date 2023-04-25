@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Conexion {
 	protected Connection BBDDcon;
-	
+	//conection driver to sql 
 	public Conexion() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

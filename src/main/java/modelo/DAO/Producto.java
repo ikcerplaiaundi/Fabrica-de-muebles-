@@ -65,7 +65,7 @@ public class Producto {
 
 	public boolean setStockProducto(int stockProducto) {
 		
-		// stock cant be negative
+		// stock can't be negative
 		if (stockProducto < 0) {
 			return false;
 		} else {

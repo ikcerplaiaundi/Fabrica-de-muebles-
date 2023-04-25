@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Piezas {
-	//tipe of elements what conform products
+	//type of elements what conform products
 	private int idPiezas;
 	private String nombrePiezas;
 	private int stockPiezas;
