@@ -34,7 +34,7 @@ public class Producto {
 		return precioProducto;
 	}
 	public boolean setPrecioProducto(double precioProducto) {
-		//a price cant be negative
+		//a price can't be negative
 		if(precioProducto <0) {return false;}
 		else {this.precioProducto = precioProducto; return true;}
 	}
