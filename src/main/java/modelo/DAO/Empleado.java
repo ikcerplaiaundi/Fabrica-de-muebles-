@@ -7,7 +7,7 @@ public class Empleado {
 	private String puesto;
 	private int mgr;
 	private Rol rol;
-	private String contraseña;
+	private String contraseñaEmpleado;
 	//get/set
 	public int getIdEmpleado() {
 		return idEmpleado;
@@ -39,11 +39,11 @@ public class Empleado {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContraseñaEmpleado() {
+		return contraseñaEmpleado;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseñaEmpleado(String contraseña) {
+		this.contraseñaEmpleado = contraseña;
 	}
 	
 }

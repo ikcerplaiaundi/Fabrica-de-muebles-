@@ -46,13 +46,15 @@ public class LogDrive extends HttpServlet {
 
 		String Mensage = "inserte el usuario y contraseña";
 		modelo.DAO.User user = new modelo.DAO.User();
-		String contraseña  = new String();
+		
+		user.setNombre(request.getParameter("nombre"));
+		user.setContra(request.getParameter("contraseña"));
 		
 
 		modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
 		GDBB.abrirConexion();
-		Boolean[] chek =GDBB.ChekUser(user);
-		GDBB.cerrarConexion();
+		Boolean[] chek =GDBB.ChekUser(user,"clientes");
+		
 		
 		if ( chek[0]) {
 			Mensage = "contrseña incorrecta";
@@ -61,8 +63,10 @@ public class LogDrive extends HttpServlet {
 			Mensage = "usuario no encontrado";
 		}	
 		if (( chek[0])&&( chek[1])) {
+			modelo.DAO.Client client = new modelo.DAO.Client();
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("logedUser", user);
+			session.setAttribute("logedclient", user);
 			Mensage = "bien venido " + user.getNombre();
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
@@ -74,6 +78,8 @@ public class LogDrive extends HttpServlet {
 			// a que jsp?
 			request.getRequestDispatcher("log.jsp").forward(request, response);
 		}
+		
+		chek =GDBB.ChekUser(user,"empleados");
 		GDBB.cerrarConexion();
 
 	}

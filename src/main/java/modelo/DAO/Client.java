@@ -3,7 +3,7 @@ package modelo.DAO;
 public class Client {
 	//who want buy something
 	private int intClient;
-	private String rolNombreClient;
+	private String NombreClient;
 	private String contactoClient;
 	private String dniClient;
 	private String direccionClient;
@@ -15,11 +15,11 @@ public class Client {
 	public void setIntClient(int intClient) {
 		this.intClient = intClient;
 	}
-	public String getRolNombreClient() {
-		return rolNombreClient;
+	public String getNombreClient() {
+		return NombreClient;
 	}
-	public void setRolNombreClient(String rolNombreClient) {
-		this.rolNombreClient = rolNombreClient;
+	public void setNombreClient(String NombreClient) {
+		this.NombreClient = NombreClient;
 	}
 	public String getContactoClient() {
 		return contactoClient;
