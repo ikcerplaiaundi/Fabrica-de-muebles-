@@ -9,6 +9,7 @@ public class Piezas {
 	private int idPiezas;
 	private String nombrePiezas;
 	private int stockPiezas;
+	private String decripcion;
 	//date for sql
 	private String pattern = "yyyy-MM-dd";
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -76,6 +77,12 @@ public class Piezas {
 	}
 	public void setStockPiezas(int stockPiezas) {
 		this.stockPiezas = stockPiezas;
+	}
+	public String getDecripcion() {
+		return decripcion;
+	}
+	public void setDecripcion(String decripcion) {
+		this.decripcion = decripcion;
 	}
 	
 	
