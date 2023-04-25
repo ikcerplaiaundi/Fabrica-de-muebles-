@@ -7,5 +7,32 @@ import java.sql.SQLException;
 
 
 public class GestorBDD extends Conexion{
-	
+	public Boolean[] ChekUser(modelo.DAO.User user) {
+		String selectUsuarios = "SELECT * FROM ususrios WHERE Nombre= ?";
+		Boolean[] Chek =new Boolean[2];
+		Chek[0]=false;
+		Chek[1]=false;
+		PreparedStatement mostrarUsuarios;
+		try {
+			mostrarUsuarios = super.BBDDcon.prepareStatement(selectUsuarios);
+			mostrarUsuarios.setString(1, user.getNombre());
+			ResultSet resultSet = mostrarUsuarios.executeQuery();
+			resultSet.next();
+			
+			
+			if(user.getNombre().equals(resultSet.getString("Nombre"))) {
+				Chek[0]=true;
+			}
+			if(user.getContra().equals(resultSet.getString("Contra"))) {
+				Chek[1]=true;
+			}
+		
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			Chek[0]=false;
+			Chek[1]=false;
+		}
+		
+		return Chek;
+	}
 }
