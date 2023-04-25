@@ -7,15 +7,17 @@ import java.sql.SQLException;
 
 
 public class GestorBDD extends Conexion{
-	public Boolean[] ChekUser(modelo.DAO.User user) {
-		String selectUsuarios = "SELECT * FROM ususrios WHERE Nombre= ?";
+	public Boolean[] ChekUser(modelo.DAO.User user, String tabla) {
+		
+		String selectUsuarios = "SELECT * FROM ? WHERE Nombre= ?";
 		Boolean[] Chek =new Boolean[2];
 		Chek[0]=false;
 		Chek[1]=false;
 		PreparedStatement mostrarUsuarios;
 		try {
 			mostrarUsuarios = super.BBDDcon.prepareStatement(selectUsuarios);
-			mostrarUsuarios.setString(1, user.getNombre());
+			mostrarUsuarios.setString(1, tabla);
+			mostrarUsuarios.setString(2, user.getNombre());
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
 			resultSet.next();
 			
@@ -35,4 +37,5 @@ public class GestorBDD extends Conexion{
 		
 		return Chek;
 	}
+	
 }
