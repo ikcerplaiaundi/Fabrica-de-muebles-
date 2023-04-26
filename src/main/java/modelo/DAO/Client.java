@@ -8,6 +8,7 @@ public class Client {
 	private String dniClient;
 	private String direccionClient;
 	private Rol rolClient;
+	private boolean registrado;
 	private String contraseñaClient;
 	public int getIdClient() {
 		return idClient;
@@ -50,6 +51,12 @@ public class Client {
 	}
 	public void setContraseñaClient(String contraseñaClient) {
 		this.contraseñaClient = contraseñaClient;
+	}
+	public boolean getRegistrado() {
+		return registrado;
+	}
+	public void setRegistrado(boolean registrado) {
+		this.registrado = registrado;
 	}
 	
 }
