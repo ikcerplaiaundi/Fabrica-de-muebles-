@@ -5,21 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Piezas {
-	//type of elements what conform products
+	// type of elements what conform products
 	private int idPiezas;
 	private String nombrePiezas;
 	private int stockPiezas;
 	private String decripcion;
-	//date for sql
+	// date for sql
 	private String pattern = "yyyy-MM-dd";
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	private Date fechaEntrada;
-	//date 
+
+	// date
 	public Date getFechaEntrada() {
-		return  fechaEntrada;
+		return fechaEntrada;
 	}
+
 	public String getStringFechaEntrada() {
-		return ""+simpleDateFormat.format(this.fechaEntrada);
+		return "" + simpleDateFormat.format(this.fechaEntrada);
 	}
 
 	public String getStringFechaEntrada(String patern) {
@@ -41,16 +43,15 @@ public class Piezas {
 
 	public String getPattern() {
 		return pattern;
-		
+
 	}
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 		String auxdate = getStringFechaEntrada();
-		this.simpleDateFormat=new SimpleDateFormat(pattern);
+		this.simpleDateFormat = new SimpleDateFormat(pattern);
 		this.setFechaEntrada(auxdate);
 	}
-
 
 	public SimpleDateFormat getSimpleDateFormat() {
 		return simpleDateFormat;
@@ -59,33 +60,44 @@ public class Piezas {
 	public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
 		this.simpleDateFormat = simpleDateFormat;
 	}
-	//simple atributes
+
+	// simple atributes
 	public int getIdPiezas() {
 		return idPiezas;
 	}
+
 	public void setIdPiezas(int idPiezas) {
 		this.idPiezas = idPiezas;
 	}
+
 	public String getNombrePiezas() {
 		return nombrePiezas;
 	}
+
 	public void setNombrePiezas(String nombrePiezas) {
 		this.nombrePiezas = nombrePiezas;
 	}
+
 	public int getStockPiezas() {
 		return stockPiezas;
 	}
+
 	public boolean setStockPiezas(int stockPiezas) {
-		//stock cant be negative
-		if(stockPiezas <0) {return false;}
-		else {this.stockPiezas = stockPiezas; return true;}
+		// stock cant be negative
+		if (stockPiezas < 0) {
+			return false;
+		} else {
+			this.stockPiezas = stockPiezas;
+			return true;
+		}
 	}
+
 	public String getDecripcion() {
 		return decripcion;
 	}
+
 	public void setDecripcion(String decripcion) {
 		this.decripcion = decripcion;
 	}
-	
-	
+
 }
