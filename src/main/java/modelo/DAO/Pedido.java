@@ -7,9 +7,10 @@ import java.util.Date;
 
 public class Pedido {
 	// a list of products for send to a client
-	private int idPedido;
-	private double costo;
+	private int idPedidos;
+	private double costoPedido;
 	private Client client;
+	private int idFactura;
 	private ArrayList<Producto> productos = new <Producto>ArrayList();
 	// date for sql
 	private String pattern = "yyyy-MM-dd";
@@ -63,20 +64,29 @@ public class Pedido {
 	}
 
 	// simple attribute get set
+
 	public int getIdPedido() {
-		return idPedido;
+		return idPedidos;
 	}
 
 	public void setIdPedido(int idPedido) {
-		this.idPedido = idPedido;
+		this.idPedidos = idPedido;
+	}
+
+	public int getIdFactura() {
+		return idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
 	}
 
 	public double getCosto() {
-		return costo;
+		return costoPedido;
 	}
 
 	public void setCosto(double costo) {
-		this.costo = costo;
+		this.costoPedido = costo;
 	}
 
 	public Client getClient() {

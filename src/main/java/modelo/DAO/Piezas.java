@@ -9,7 +9,8 @@ public class Piezas {
 	private int idPiezas;
 	private String nombrePieza;
 	private int stockPieza;
-	private String decripcion;
+	private String decripcionPieza;
+	private int idProductos;
 	// date for sql
 	private String pattern = "yyyy-MM-dd";
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -61,7 +62,7 @@ public class Piezas {
 		this.simpleDateFormat = simpleDateFormat;
 	}
 
-	// simple atributes
+	// simple attributes
 	public int getIdPiezas() {
 		return idPiezas;
 	}
@@ -82,8 +83,16 @@ public class Piezas {
 		return stockPieza;
 	}
 
+	public int getIdProductos() {
+		return idProductos;
+	}
+
+	public void setIdProductos(int idProductos) {
+		this.idProductos = idProductos;
+	}
+
 	public boolean setStockPiezas(int stockPiezas) {
-		// stock cant be negative
+		// stock can`t be negative
 		if (stockPiezas < 0) {
 			return false;
 		} else {
@@ -93,11 +102,11 @@ public class Piezas {
 	}
 
 	public String getDecripcion() {
-		return decripcion;
+		return decripcionPieza;
 	}
 
 	public void setDecripcion(String decripcion) {
-		this.decripcion = decripcion;
+		this.decripcionPieza = decripcion;
 	}
 
 }
