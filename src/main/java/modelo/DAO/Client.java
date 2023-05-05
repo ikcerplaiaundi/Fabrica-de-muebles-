@@ -2,61 +2,61 @@ package modelo.DAO;
 
 public class Client {
 	// who want buy something
-	private int idClient;
-	private String NombreClient;
-	private String contactoClient;
-	private String dniClient;
-	private String direccionClient;
+	private int idClientes;
+	private String nombreCliente;
+	private String contactoCliente;
+	private String dniCliente;
+	private String direccionCliente;
 	private int registrado;
-	private String contraseñaClient;
+	private String cliPassword;
 
 	public int getIdClient() {
-		return idClient;
+		return idClientes;
 	}
 
 	public void setIdClient(int intClient) {
-		this.idClient = intClient;
+		this.idClientes = intClient;
 	}
 
 	public String getNombreClient() {
-		return NombreClient;
+		return nombreCliente;
 	}
 
 	public void setNombreClient(String NombreClient) {
-		this.NombreClient = NombreClient;
+		this.nombreCliente = NombreClient;
 	}
 
 	public String getContactoClient() {
-		return contactoClient;
+		return contactoCliente;
 	}
 
 	public void setContactoClient(String contactoClient) {
-		this.contactoClient = contactoClient;
+		this.contactoCliente = contactoClient;
 	}
 
 	public String getDniClient() {
-		return dniClient;
+		return dniCliente;
 	}
 
 	public void setDniClient(String dniClient) {
-		this.dniClient = dniClient;
+		this.dniCliente = dniClient;
 	}
 
 	public String getDireccionClient() {
-		return direccionClient;
+		return direccionCliente;
 	}
 
 	public void setDireccionClient(String direccionClient) {
-		this.direccionClient = direccionClient;
+		this.direccionCliente = direccionClient;
 	}
 
 
 	public String getContraseñaClient() {
-		return contraseñaClient;
+		return cliPassword;
 	}
 
 	public void setContraseñaClient(String contraseñaClient) {
-		this.contraseñaClient = contraseñaClient;
+		this.cliPassword = contraseñaClient;
 	}
 
 	public int getRegistrado() {
