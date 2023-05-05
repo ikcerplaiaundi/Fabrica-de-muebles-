@@ -54,8 +54,8 @@ public class LogDrive extends HttpServlet {
 		modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
 		GDBB.abrirConexion();
 		
-		//check for clients
-		Boolean[] chek =GDBB.ChekUser(user,"clientes");
+		//check 
+		Boolean[] chek =GDBB.ChekUser(user);
 		
 		
 		if ( chek[0]) {
@@ -86,28 +86,7 @@ public class LogDrive extends HttpServlet {
 		
 		
 		
-		//check for employees
-		chek =GDBB.ChekUser(user,"empleados");
 		
-		if (( chek[0])&&( chek[1])) {
-			modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
-			empleado.setIdEmpleado(user.getId());
-			empleado.setNombreEmpleado(user.getNombre());
-			empleado.setContraseñaEmpleado(user.getContra());
-			GDBB.pullEmpleado(empleado);
-			HttpSession session = request.getSession();
-			session.setAttribute("logedclient", user);
-			Mensage = "bien venido " + user.getNombre();
-			// enviar datos
-			request.setAttribute("Mensage", Mensage);
-			// a que jsp?
-				response.sendRedirect("forRedirect");
-			} else {
-			// enviar datos
-			request.setAttribute("Mensage", Mensage);
-			// a que jsp?
-			request.getRequestDispatcher("log.jsp").forward(request, response);
-		}
 		
 		
 		GDBB.cerrarConexion();
