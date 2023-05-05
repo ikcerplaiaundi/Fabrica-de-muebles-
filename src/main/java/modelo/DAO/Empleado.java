@@ -4,9 +4,9 @@ public class Empleado {
 	// all employers need to be an employ and role
 	private int idEmpleado;
 	private String nombreEmpleado;
-	private String puesto;
 	private int mgr;
-	private String contraseñaEmpleado;
+	private String rol;
+	private String empPassword;
 
 	// get/set
 	public int getIdEmpleado() {
@@ -25,14 +25,6 @@ public class Empleado {
 		this.nombreEmpleado = nombreEmpleado;
 	}
 
-	public String getPuesto() {
-		return puesto;
-	}
-
-	public void setPuesto(String puesto) {
-		this.puesto = puesto;
-	}
-
 	public int getMgr() {
 		return mgr;
 	}
@@ -43,11 +35,21 @@ public class Empleado {
 
 
 	public String getContraseñaEmpleado() {
-		return contraseñaEmpleado;
+		return empPassword;
 	}
 
 	public void setContraseñaEmpleado(String contraseña) {
-		this.contraseñaEmpleado = contraseña;
+		this.empPassword = contraseña;
 	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	
+	
 
 }
