@@ -6,7 +6,6 @@ public class Empleado {
 	private String nombreEmpleado;
 	private String puesto;
 	private int mgr;
-	private Rol rol;
 	private String contraseñaEmpleado;
 
 	// get/set
@@ -42,13 +41,6 @@ public class Empleado {
 		this.mgr = mgr;
 	}
 
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
 
 	public String getContraseñaEmpleado() {
 		return contraseñaEmpleado;

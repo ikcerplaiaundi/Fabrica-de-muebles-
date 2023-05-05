@@ -7,7 +7,6 @@ public class Client {
 	private String contactoClient;
 	private String dniClient;
 	private String direccionClient;
-	private Rol rolClient;
 	private boolean registrado;
 	private String contraseñaClient;
 
@@ -51,13 +50,6 @@ public class Client {
 		this.direccionClient = direccionClient;
 	}
 
-	public Rol getRolClient() {
-		return rolClient;
-	}
-
-	public void setRolClient(Rol rolClient) {
-		this.rolClient = rolClient;
-	}
 
 	public String getContraseñaClient() {
 		return contraseñaClient;
