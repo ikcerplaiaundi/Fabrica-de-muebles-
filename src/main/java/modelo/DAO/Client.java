@@ -7,7 +7,7 @@ public class Client {
 	private String contactoClient;
 	private String dniClient;
 	private String direccionClient;
-	private boolean registrado;
+	private int registrado;
 	private String contraseñaClient;
 
 	public int getIdClient() {
@@ -59,11 +59,11 @@ public class Client {
 		this.contraseñaClient = contraseñaClient;
 	}
 
-	public boolean getRegistrado() {
+	public int getRegistrado() {
 		return registrado;
 	}
 
-	public void setRegistrado(boolean registrado) {
+	public void setRegistrado(int registrado) {
 		this.registrado = registrado;
 	}
 

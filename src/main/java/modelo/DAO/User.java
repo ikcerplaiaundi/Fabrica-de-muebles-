@@ -3,8 +3,10 @@ package modelo.DAO;
 public class User {
 	private String nombre;
 	private String contra;
+	private String rol;
+	private int registrado;
 	private int id;
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -34,4 +36,20 @@ public class User {
 		this.id = Integer.parseInt(parameter);
 	}
 
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public int getRegistrado() {
+		return registrado;
+	}
+
+	public void setRegistrado(int registrado) {
+		this.registrado = registrado;
+	}
+	
 }

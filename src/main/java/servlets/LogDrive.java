@@ -74,18 +74,14 @@ public class LogDrive extends HttpServlet {
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
 				response.sendRedirect("forRedirect");
-			} else {
-			// enviar datos
-			request.setAttribute("Mensage", Mensage);
-			// a que jsp?
-			request.getRequestDispatcher("log.jsp").forward(request, response);
-		}
+			} 
 		
 		if (( !chek[2])&&( !chek[3])) {
 			modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
 			empleado.setIdEmpleado(user.getId());
 			empleado.setNombreEmpleado(user.getNombre());
 			empleado.setContraseñaEmpleado(user.getContra());
+			//empleado.setRol(user.getRol());
 			GDBB.pullEmpleado(empleado);
 			HttpSession session = request.getSession();
 			session.setAttribute("logedclient", user);
@@ -93,13 +89,15 @@ public class LogDrive extends HttpServlet {
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
-				response.sendRedirect("forRedirect");
-			} else {
+			response.sendRedirect("forRedirect");
+			}
+			
+		
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
 			request.getRequestDispatcher("log.jsp").forward(request, response);
-		}
+		
 		
 		
 		

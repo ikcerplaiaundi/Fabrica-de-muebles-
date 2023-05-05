@@ -12,7 +12,7 @@ import modelo.DAO.Empleado;
 public class GestorBDD extends Conexion{
 	public Boolean[] ChekUser(modelo.DAO.User user) {
 		
-		String selectEMPLEADOS = "SELECT * FROM SYSTEM.EMPLEADOS WHERE ID_EMPLEADOS = ?";
+		String selectEMPLEADOS = "SELECT * FROM SYSTEM.EMPLEADOS WHERE ID_EMPLEADOS = ? and REGISTRADO = 1";
 		Boolean[] Chek =new Boolean[4];
 		Chek[0]=false;
 		Chek[1]=false;
