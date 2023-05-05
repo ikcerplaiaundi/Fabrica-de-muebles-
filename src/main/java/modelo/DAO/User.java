@@ -4,6 +4,7 @@ public class User {
 	private String nombre;
 	private String contra;
 	private int id;
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -32,7 +33,5 @@ public class User {
 		// String evolve to integer
 		this.id = Integer.parseInt(parameter);
 	}
-
-	
 
 }

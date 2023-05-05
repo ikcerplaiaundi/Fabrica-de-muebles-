@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
-	//a list of products for send to a client
+	// a list of products for send to a client
 	private int idPedido;
 	private double costo;
 	private Client client;
@@ -61,9 +61,8 @@ public class Pedido {
 	public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
 		this.simpleDateFormat = simpleDateFormat;
 	}
-	
-	
-	//simple attribute get set
+
+	// simple attribute get set
 	public int getIdPedido() {
 		return idPedido;
 	}

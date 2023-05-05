@@ -3,7 +3,7 @@ package modelo.DAO;
 import java.util.ArrayList;
 
 public class Producto {
-//tipe of products
+//type of products
 	private int idProducto;
 	private String nombreProducto;
 	private String descripcionProducto;
@@ -64,7 +64,7 @@ public class Producto {
 	}
 
 	public boolean setStockProducto(int stockProducto) {
-		
+
 		// stock can't be negative
 		if (stockProducto < 0) {
 			return false;
