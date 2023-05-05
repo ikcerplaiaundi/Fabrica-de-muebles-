@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
-
 /**
  * Servlet implementation class LogDrive
  */
@@ -49,22 +46,20 @@ public class LogDrive extends HttpServlet {
 		user.setIdLikeString(request.getParameter("userId"));
 		user.setNombre(request.getParameter("nombre"));
 		user.setContra(request.getParameter("contraseña"));
-		
 
 		modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
 		GDBB.abrirConexion();
-		
-		//check for clients
-		Boolean[] chek =GDBB.ChekUser(user,"clientes");
-		
-		
-		if ( chek[0]) {
+
+		// check for clients
+		Boolean[] chek = GDBB.ChekUser(user, "clientes");
+
+		if (chek[0]) {
 			Mensage = "contrseña incorrecta";
 		}
-		if ( chek[1]) {
+		if (chek[1]) {
 			Mensage = "usuario no encontrado";
-		}	
-		if (( chek[0])&&( chek[1])) {
+		}
+		if ((chek[0]) && (chek[1])) {
 			modelo.DAO.Client client = new modelo.DAO.Client();
 			client.setIdClient(user.getId());
 			client.setNombreClient(user.getNombre());
@@ -76,20 +71,18 @@ public class LogDrive extends HttpServlet {
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
-				response.sendRedirect("forRedirect");
-			} else {
+			response.sendRedirect("forRedirect");
+		} else {
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
 			request.getRequestDispatcher("log.jsp").forward(request, response);
 		}
-		
-		
-		
-		//check for employees
-		chek =GDBB.ChekUser(user,"empleados");
-		
-		if (( chek[0])&&( chek[1])) {
+
+		// check for employees
+		chek = GDBB.ChekUser(user, "empleados");
+
+		if ((chek[0]) && (chek[1])) {
 			modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
 			empleado.setIdEmpleado(user.getId());
 			empleado.setNombreEmpleado(user.getNombre());
@@ -101,15 +94,14 @@ public class LogDrive extends HttpServlet {
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
-				response.sendRedirect("forRedirect");
-			} else {
+			response.sendRedirect("forRedirect");
+		} else {
 			// enviar datos
 			request.setAttribute("Mensage", Mensage);
 			// a que jsp?
 			request.getRequestDispatcher("log.jsp").forward(request, response);
 		}
-		
-		
+
 		GDBB.cerrarConexion();
 
 	}
