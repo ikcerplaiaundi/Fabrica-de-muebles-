@@ -66,7 +66,7 @@ public class LogDrive extends HttpServlet {
 			client.setIdClient(user.getId());
 			client.setNombreClient(user.getNombre());
 			client.setContraseñaClient(user.getContra());
-			GDBB.pullCliente(client);
+			GDBB.pullCliente(client,user);
 			HttpSession session = request.getSession();
 			session.setAttribute("logedclient", user);
 			Mensage = "bien venido " + user.getNombre();
@@ -81,8 +81,8 @@ public class LogDrive extends HttpServlet {
 			empleado.setIdEmpleado(user.getId());
 			empleado.setNombreEmpleado(user.getNombre());
 			empleado.setContraseñaEmpleado(user.getContra());
-			//empleado.setRol(user.getRol());
-			GDBB.pullEmpleado(empleado);
+			empleado.setRol(user.getRol());
+			GDBB.pullEmpleado(empleado,user);
 			HttpSession session = request.getSession();
 			session.setAttribute("logedclient", user);
 			Mensage = "bien venido " + user.getNombre();
