@@ -7,8 +7,8 @@ import java.util.Date;
 public class Piezas {
 	// type of elements what conform products
 	private int idPiezas;
-	private String nombrePiezas;
-	private int stockPiezas;
+	private String nombrePieza;
+	private int stockPieza;
 	private String decripcion;
 	// date for sql
 	private String pattern = "yyyy-MM-dd";
@@ -71,15 +71,15 @@ public class Piezas {
 	}
 
 	public String getNombrePiezas() {
-		return nombrePiezas;
+		return nombrePieza;
 	}
 
 	public void setNombrePiezas(String nombrePiezas) {
-		this.nombrePiezas = nombrePiezas;
+		this.nombrePieza = nombrePiezas;
 	}
 
 	public int getStockPiezas() {
-		return stockPiezas;
+		return stockPieza;
 	}
 
 	public boolean setStockPiezas(int stockPiezas) {
@@ -87,7 +87,7 @@ public class Piezas {
 		if (stockPiezas < 0) {
 			return false;
 		} else {
-			this.stockPiezas = stockPiezas;
+			this.stockPieza = stockPiezas;
 			return true;
 		}
 	}

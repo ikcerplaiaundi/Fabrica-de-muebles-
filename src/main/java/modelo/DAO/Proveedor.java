@@ -2,34 +2,34 @@ package modelo.DAO;
 
 public class Proveedor {
 	// This is the class of the supplier of the goods("Piezas")
-	private String direccion;
-	private String cif;
-	private String telefono;
+	private String direccionProveedor;
+	private String cifProveedor;
+	private String contactProveedor;
 	private String nombreProveedor;
 	private int idProveedor;
 
 	public String getDireccion() {
-		return direccion;
+		return direccionProveedor;
 	}
 
 	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+		this.direccionProveedor = direccion;
 	}
 
 	public String getCif() {
-		return cif;
+		return cifProveedor;
 	}
 
 	public void setCif(String cif) {
-		this.cif = cif;
+		this.cifProveedor = cif;
 	}
 
 	public String getTelefono() {
-		return telefono;
+		return contactProveedor;
 	}
 
 	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+		this.contactProveedor = telefono;
 	}
 
 	public String getNombre() {
