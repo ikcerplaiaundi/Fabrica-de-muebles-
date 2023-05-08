@@ -12,55 +12,64 @@ import modelo.DAO.Empleado;
 public class GestorBDD extends Conexion{
 	public Boolean[] ChekUser(modelo.DAO.User user) {
 		
-		String selectEMPLEADOS = "SELECT * FROM SYSTEM.EMPLEADOS WHERE ID_EMPLEADOS = ? and REGISTRADO = 1";
+		String selectEMPLEADOS = "SELECT * FROM SYSTEM.EMPLEADOS WHERE NOMBRE_EMPLEADO = '"+user.getNombre()+"'";
 		Boolean[] Chek =new Boolean[4];
 		Chek[0]=false;
 		Chek[1]=false;
 		Chek[2]=false;
 		Chek[3]=false;
-		PreparedStatement mostrarUsuarios;
-		try {
-			mostrarUsuarios = super.BBDDcon.prepareStatement(selectEMPLEADOS);
 		
-			mostrarUsuarios.setString(1, user.getNombre());
-			ResultSet resultSet = mostrarUsuarios.executeQuery();
-			resultSet.next();
+		
+		try {
+			PreparedStatement mostrarEMPLEADOS = super.BBDDcon.prepareStatement(selectEMPLEADOS);
+			ResultSet resultSetEMP = mostrarEMPLEADOS.executeQuery();
+			while (resultSetEMP.next()) {
+				System.out.println(" rest"+resultSetEMP.getInt(1));
+				System.out.println(" rest"+resultSetEMP.getString(2));
+				System.out.println(" rest"+resultSetEMP.getString(3));
+				System.out.println(" rest"+resultSetEMP.getString(4));
+				System.out.println(" rest"+resultSetEMP.getString(5));
+				System.out.println(" rest"+resultSetEMP.getString(6));
+				System.out.println(" rest"+resultSetEMP.getInt(7));
 			
 			
-			if(user.getNombre().equals(resultSet.getString("NOMBRE_EMPLEADO"))) {
-				Chek[0]=true;
+			Chek[0]= user.getNombre().equals(resultSetEMP.getString(2));
+			
+			Chek[1]= user.getContra().equals(resultSetEMP.getString("EMP_PASWORD"));
 			}
-			if(user.getContra().equals(resultSet.getString("EMP_PASWORD"))) {
-				Chek[1]=true;
-			}
-			if(resultSet.getString("EMP_PASWORD") !=null)return Chek;
+			if(resultSetEMP.getString("EMP_PASWORD") !=null)return Chek;
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-			Chek[0]=false;
-			Chek[1]=false;
+			
 		}
-		String selectCLIENTES = "SELECT * FROM SYSTEM.CLIENTES WHERE NOMBRE_CLIENTE = ? and CLI_PASWORD =?";
+		String selectCLIENTES = "SELECT * FROM SYSTEM.CLIENTES WHERE NOMBRE_CLIENTE = '"+user.getNombre()+"'";
 		try {
 			
-			mostrarUsuarios = super.BBDDcon.prepareStatement(selectCLIENTES);
+			PreparedStatement mostrarCLIENTES = super.BBDDcon.prepareStatement(selectCLIENTES);
 		
-			mostrarUsuarios.setString(1, user.getNombre());
-			mostrarUsuarios.setString(2, user.getContra());
-			ResultSet resultSet = mostrarUsuarios.executeQuery();
-			resultSet.next();
-			user.setId(resultSet.getInt("ID_CLIENTES"));
 			
-			if(user.getNombre().equals(resultSet.getString("NOMBRE_CLIENTE"))) {
-				Chek[2]=true;
+			ResultSet resultSetCLI = mostrarCLIENTES.executeQuery();
+			
+			while (resultSetCLI.next()) {
+				
+			System.out.println(" rest"+resultSetCLI.getInt(1));
+			System.out.println(" rest"+resultSetCLI.getString(2));
+			System.out.println(" rest"+resultSetCLI.getString(3));
+			System.out.println(" rest"+resultSetCLI.getString(4));
+			System.out.println(" rest"+resultSetCLI.getString(5));
+			System.out.println(" rest"+resultSetCLI.getString(6));
+			System.out.println(" rest"+resultSetCLI.getInt(7));
+			
+			user.setId(resultSetCLI.getInt(1));
+			
+			Chek[2]= user.getNombre().equals(resultSetCLI.getString(3));
+			
+			Chek[3]= user.getContra().equals(resultSetCLI.getString(6));
 			}
-			if(user.getContra().equals(resultSet.getString("CLI_PASWORD"))) {
-				Chek[3]=true;
-			}
-			if(resultSet.getString("CLI_PASWORD") !=null)return Chek;
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-			Chek[2]=false;
-			Chek[3]=false;
+			
 		}
 		return Chek;
 	}
