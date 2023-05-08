@@ -34,9 +34,12 @@ public class ChooseProducts extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GestorBDD gdbb =new GestorBDD();
 		gdbb.abrirConexion();
-		ArrayList <Producto> productos = gdbb.pullProductos("");
+		ArrayList <Producto> productos = gdbb.pullProductos(" /**/ ");
 		gdbb.abrirConexion();
-		//request.setAttribute("productos", productos);
+		
+		
+		
+		request.setAttribute("productos", productos);
 		response.sendRedirect("ChooseProducts.jsp");
 	}
 

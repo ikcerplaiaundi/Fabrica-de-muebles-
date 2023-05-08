@@ -100,7 +100,9 @@ public class GestorBDD extends Conexion {
 
 	public ArrayList<Producto> pullProductos(String were) {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
-		String selectProductos = "SELECT * FROM SYSTEM.PRODUCTOS"+were;
+		String selectProductos = "SELECT * FROM SYSTEM.PRODUCTOS ";
+		if(were != null) {selectProductos.concat(were);}
+		
 		PreparedStatement mostrarProductos;
 		try {
 			mostrarProductos = super.BBDDcon.prepareStatement(selectProductos);
@@ -120,9 +122,9 @@ public class GestorBDD extends Conexion {
 				producto.setStockProducto(resultSet.getInt(4));
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdPedidos(resultSet.getInt(6));
-				producto.setFechaEntrada(resultSet.getString(7));
+				//producto.setFechaEntrada(resultSet.getString(7));
 				producto.setIdFabricante(resultSet.getInt(8));
-				
+				productos.add(producto);
 			}
 
 		} catch (SQLException e) {
