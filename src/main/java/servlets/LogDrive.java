@@ -52,10 +52,7 @@ public class LogDrive extends HttpServlet {
 
 		// check
 		Boolean[] chek = GDBB.ChekUser(user);
-		System.out.println(chek[0]);
-		System.out.println(chek[1]);
-		System.out.println(chek[2]);
-		System.out.println(chek[3]);
+		
 
 		if (!chek[0] || !chek[2]) {
 			Mensage = "contrseña incorrecta";
@@ -63,7 +60,7 @@ public class LogDrive extends HttpServlet {
 		if (!chek[1] || !chek[3]) {
 			Mensage = "usuario no encontrado";
 		}
-		if ((chek[0]) && (chek[1])) {
+		if ((chek[2]) && (chek[3])) {
 			modelo.DAO.Client client = new modelo.DAO.Client();
 			GDBB.pullCliente(client, user);
 			HttpSession session = request.getSession();
@@ -73,7 +70,7 @@ public class LogDrive extends HttpServlet {
 			response.sendRedirect("ChooseProducts");
 		} else {
 
-			if ((chek[2]) && (chek[3])) {
+			if ((chek[1]) && (chek[0])) {
 				modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
 				GDBB.pullEmpleado(empleado, user);
 				HttpSession session = request.getSession();

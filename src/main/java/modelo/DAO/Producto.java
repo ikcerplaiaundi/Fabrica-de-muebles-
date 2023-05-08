@@ -143,5 +143,7 @@ public class Producto {
 	public void setPiezas(ArrayList<Piezas> piezas) {
 		this.piezas = piezas;
 	}
-
+	
+	
+	
 }
