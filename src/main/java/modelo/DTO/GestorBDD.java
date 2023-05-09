@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+
 import modelo.DAO.Client;
 import modelo.DAO.Empleado;
 import modelo.DAO.Pedido;
@@ -37,8 +39,8 @@ public class GestorBDD extends Conexion {
 
 		}
 		// user in a client ?
-		String selectCLIENTES = "SELECT * FROM ap_Admin.CLIENTES WHERE NOMBRE_CLIENTE ='" + user.getNombre()	+ "' and REGISTRADO = 1"
-				;
+		String selectCLIENTES = "SELECT * FROM ap_Admin.CLIENTES WHERE NOMBRE_CLIENTE ='" + user.getNombre()
+				+ "' and REGISTRADO = 1";
 		try {
 
 			PreparedStatement mostrarCLIENTES = super.BBDDcon.prepareStatement(selectCLIENTES);
@@ -47,7 +49,7 @@ public class GestorBDD extends Conexion {
 
 			while (resultSetCLI.next()) {
 				user.setId(resultSetCLI.getInt(1));
-				
+
 				Chek[2] = user.getNombre().equals(resultSetCLI.getString(3));
 
 				Chek[3] = user.getContra().equals(resultSetCLI.getString(6));
@@ -126,14 +128,11 @@ public class GestorBDD extends Conexion {
 				producto.setStockProducto(resultSet.getInt(4));
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdFabricante(resultSet.getInt(6));
-				
+
 				System.out.println(producto.getNombreProducto());
 				productos.add(producto);
-				
+
 			}
-			
-				
-			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -159,7 +158,9 @@ public class GestorBDD extends Conexion {
 				Pedido pedido = new Pedido();
 
 				pedido.setIdPedido(resultSet.getInt(1));
-				pedido.setFechaPedido(resultSet.getString(2));
+				String palabra[] = new String[2];
+				palabra = resultSet.getString(2).split(" ");
+				pedido.setFechaPedido(palabra[0]);
 				// pedido.setClient(resultSet.getInt(3)); not required
 				pedido.setCosto(resultSet.getInt(5));
 				pedido.setIdFactura(resultSet.getInt(6));
@@ -173,6 +174,37 @@ public class GestorBDD extends Conexion {
 		}
 
 		return pedidos;
+	}
+
+	public ArrayList<Client> pullClients(String where) {
+
+		ArrayList<Client> clientes = new ArrayList<Client>();
+		String clientesselecion = "SELECT * FROM ap_Admin.CLIENTES";
+		if (where != null) {
+			clientesselecion.concat(where);
+		}
+
+		try {
+
+			PreparedStatement cientestotal = super.BBDDcon.prepareStatement(clientesselecion);
+			ResultSet resultSet = cientestotal.executeQuery();
+
+			while (resultSet.next()) {
+				Client client = new Client();
+				client.setIdClient(resultSet.getInt(1));
+				client.setDireccionClient(resultSet.getString(2));
+				client.setNombreClient(resultSet.getString(3));
+				client.setContactoClient(resultSet.getString(4));
+				client.setDniClient(resultSet.getString(5));
+				client.setRegistrado(resultSet.getInt(7));
+
+				clientes.add(client);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return clientes;
 	}
 
 }

@@ -1,11 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import modelo.DAO.Client;
+import modelo.DTO.GestorBDD;
 
 /**
  * Servlet implementation class ClientManagement
@@ -29,7 +34,15 @@ public class ClientManagement extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		response.sendRedirect("log.jsp");
+		GestorBDD gdbb = new GestorBDD();
+		
+		gdbb.abrirConexion();
+		
+		ArrayList<Client> clientes = gdbb.pullClients(" /**/ ");
+		
+		gdbb.cerrarConexion();
+		
+		request.setAttribute("clientex", clientes);
 	}
 
 	/**

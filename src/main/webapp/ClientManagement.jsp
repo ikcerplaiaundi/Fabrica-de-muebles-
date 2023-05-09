@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="modelo.DAO.Pedido" %>
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="modelo.DAO.Client" %>
  <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -10,14 +10,16 @@
 </head>
 <body>
 
-	<form action="OrderPage" method="post">
-
-		<c:forEach items="${pedidos}" var="pedido">
+	<form action="ClientManagement" method="post">
+	
+		<c:forEach items="${clientex}" var="clientes">
 			<label for="Id">${pedido.getIdPedido()}</label><br/>
 			<label for="Costo">${pedido.getCosto()}</label><br/>
 			<label for="factura">${pedido.getIdFactura()}</label><br/>
 			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
-		</c:forEach>
+			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
+			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
+			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
 	</form>
 
 </body>

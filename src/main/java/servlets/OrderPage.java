@@ -18,42 +18,46 @@ import modelo.DTO.GestorBDD;
 @WebServlet("/OrderPage")
 public class OrderPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public OrderPage() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-	//	request.getRequestDispatcher("log.jsp").forward(request, response);
-		
+	public OrderPage() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		GestorBDD gdbb = new GestorBDD();
-		
+
 		gdbb.abrirConexion();
-		
+
 		ArrayList<Pedido> pedidos = gdbb.pullPedidos(" /**/ ");
 		
+		gdbb.cerrarConexion();
+
 		request.setAttribute("pedidos", pedidos);
-		
-		response.sendRedirect("OrderPage.jsp");
+		request.getRequestDispatcher("OrderPage.jsp").forward(request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+
 	}
 
 }

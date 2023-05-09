@@ -13,7 +13,7 @@ public class Pedido {
 	private int idFactura;
 	private ArrayList<Producto> productos = new <Producto>ArrayList();
 	// date for sql
-	private String pattern = "dd/mm/yyyy";
+	private String pattern = "yyyy-mm-dd";
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	private Date fechaPedido;
 
