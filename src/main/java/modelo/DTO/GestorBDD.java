@@ -61,7 +61,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
-		
+
 		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -102,8 +102,10 @@ public class GestorBDD extends Conexion {
 	public ArrayList<Producto> pullProductos(String where) {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String selectProductos = "SELECT * FROM ap_Admin.PRODUCTOS ";
-		if(where != null) {selectProductos.concat(where);}
-		
+		if (where != null) {
+			selectProductos.concat(where);
+		}
+
 		PreparedStatement mostrarProductos;
 		try {
 			mostrarProductos = super.BBDDcon.prepareStatement(selectProductos);
@@ -111,12 +113,9 @@ public class GestorBDD extends Conexion {
 			ResultSet resultSet = mostrarProductos.executeQuery();
 
 			/*
-			 * ID_productos NUMBER  primary key,
-    			nombre_prod VARCHAR2(50),
-    			decripcion_prod VARCHAR2(50),
-    			stock_prod NUMBER,
-    			precio_prod numeric(12,2),
-    			id_empleados NUMBER
+			 * ID_productos NUMBER primary key, nombre_prod VARCHAR2(50), decripcion_prod
+			 * VARCHAR2(50), stock_prod NUMBER, precio_prod numeric(12,2), id_empleados
+			 * NUMBER
 			 */
 
 			while (resultSet.next()) {
@@ -139,35 +138,36 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
-	public ArrayList<Pedido> pullPedidos() {
-		
-		ArrayList<Pedido> pedidos = new ArrayList<Pedido>(); 
-		String pedidoseleccion = "SELECT * FROM PEDIDOS";
-		
+	public ArrayList<Pedido> pullPedidos(String where) {
+
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
+		if (where != null) {
+			pedidoseleccion.concat(where);
+		}
+
 		try {
 			PreparedStatement pedidoamostrar = super.BBDDcon.prepareStatement(pedidoseleccion);
 			ResultSet resultSet = pedidoamostrar.executeQuery();
-			
+
 			while (resultSet.next()) {
 				Pedido pedido = new Pedido();
-				
+
 				pedido.setIdPedido(resultSet.getInt(1));
 				pedido.setFechaPedido(resultSet.getString(2));
-				//pedido.setClient(resultSet.getInt(3));
+				// pedido.setClient(resultSet.getInt(3)); not required
 				pedido.setCosto(resultSet.getInt(5));
 				pedido.setIdFactura(resultSet.getInt(6));
-				
+
 				pedidos.add(pedido);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 		return pedidos;
 	}
 
-	
-	
 }
