@@ -32,9 +32,9 @@ public class OrderPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		
+	//	request.getRequestDispatcher("log.jsp").forward(request, response);
 		
 	}
 
@@ -53,7 +53,7 @@ public class OrderPage extends HttpServlet {
 		
 		request.setAttribute("pedidos", pedidos);
 		
-		response.sendRedirect("log.jsp");
+		response.sendRedirect("OrderPage.jsp");
 	}
 
 }
