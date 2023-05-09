@@ -20,7 +20,7 @@ public class GestorBDD extends Conexion {
 		Chek[3] = false;
 
 		// user in an employee ?
-		String selectEMPLEADOS = "SELECT * FROM SYSTEM.EMPLEADOS WHERE NOMBRE_EMPLEADO = '" + user.getNombre() + "'";
+		String selectEMPLEADOS = "SELECT * FROM ap_Admin.EMPLEADOS WHERE NOMBRE_EMPLEADO = '" + user.getNombre() + "'";
 		try {
 			PreparedStatement mostrarEMPLEADOS = super.BBDDcon.prepareStatement(selectEMPLEADOS);
 			ResultSet resultSetEMP = mostrarEMPLEADOS.executeQuery();
@@ -37,7 +37,7 @@ public class GestorBDD extends Conexion {
 
 		}
 		// user in a client ?
-		String selectCLIENTES = "SELECT * FROM SYSTEM.CLIENTES WHERE NOMBRE_CLIENTE = '" + user.getNombre()
+		String selectCLIENTES = "SELECT * FROM ap_Admin.CLIENTES WHERE NOMBRE_CLIENTE = '" + user.getNombre()
 				+ "' and REGISTRADO =1";
 		try {
 
@@ -62,7 +62,7 @@ public class GestorBDD extends Conexion {
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
 		
-		String selectClientes = "SELECT * FROM SYSTEM.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
+		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
@@ -83,7 +83,7 @@ public class GestorBDD extends Conexion {
 
 	public void pullEmpleado(Empleado empleado, modelo.DAO.User user) {
 		// TODO Auto-generated method stub
-		String selectClientes = "SELECT * FROM SYSTEM.EMPLEADOS WHERE ID_EMPLEADOS = '" + user.getId() + "'";
+		String selectClientes = "SELECT * FROM ap_Admin.EMPLEADOS WHERE ID_EMPLEADOS = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
@@ -101,7 +101,7 @@ public class GestorBDD extends Conexion {
 
 	public ArrayList<Producto> pullProductos(String where) {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
-		String selectProductos = "SELECT * FROM SYSTEM.PRODUCTOS ";
+		String selectProductos = "SELECT * FROM ap_Admin.PRODUCTOS ";
 		if(where != null) {selectProductos.concat(where);}
 		
 		PreparedStatement mostrarProductos;
@@ -140,10 +140,35 @@ public class GestorBDD extends Conexion {
 	}
 
 	public ArrayList<Pedido> pullPedidos() {
-		// TODO Auto-generated method stub
 		
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>(); 
+		String pedidoseleccion = "SELECT * FROM PEDIDOS";
 		
-		
+		try {
+			PreparedStatement pedidoamostrar = super.BBDDcon.prepareStatement(pedidoseleccion);
+			ResultSet resultSet = pedidoamostrar.executeQuery();
+			
+			while (resultSet.next()) {
+				Pedido pedido = new Pedido();
+				
+				pedido.setIdPedido(resultSet.getInt(1));
+				pedido.setFechaPedido(resultSet.getString(2));
+				pedido.setClient(resultSet.getInt(3));
+				
+				
+			}
+			
+		/*
+		 * IDpedido
+		 * fechaPedido
+		 * IDCliente
+		 * DireccionCliente
+		 * CostoPedido
+		 * idFactura*/
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		return null;
 	}
