@@ -126,8 +126,10 @@ public class GestorBDD extends Conexion {
 				producto.setStockProducto(resultSet.getInt(4));
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdFabricante(resultSet.getInt(6));
+				
+				System.out.println(producto.getNombreProducto());
 				productos.add(producto);
-				System.out.println(resultSet.getInt(1));
+				
 			}
 
 		} catch (SQLException e) {
