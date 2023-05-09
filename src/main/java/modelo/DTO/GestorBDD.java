@@ -153,24 +153,19 @@ public class GestorBDD extends Conexion {
 				
 				pedido.setIdPedido(resultSet.getInt(1));
 				pedido.setFechaPedido(resultSet.getString(2));
-				pedido.setClient(resultSet.getInt(3));
+				//pedido.setClient(resultSet.getInt(3));
+				pedido.setCosto(resultSet.getInt(5));
+				pedido.setIdFactura(resultSet.getInt(6));
 				
-				
+				pedidos.add(pedido);
 			}
-			
-		/*
-		 * IDpedido
-		 * fechaPedido
-		 * IDCliente
-		 * DireccionCliente
-		 * CostoPedido
-		 * idFactura*/
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
-		return null;
+		return pedidos;
 	}
 
 	
