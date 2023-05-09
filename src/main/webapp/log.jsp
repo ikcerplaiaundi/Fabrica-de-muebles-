@@ -29,7 +29,7 @@
 			
 			
 				<label for="password">password</label> 
-				<input type="text"  
+				<input type="password"  
 				name="contra" id="contra" 
 				value="contraseña"
 				onblur="if(this.value==""){this.value='contraseña'";}"
