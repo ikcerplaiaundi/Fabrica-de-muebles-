@@ -117,9 +117,9 @@ public class GestorBDD extends Conexion {
 			 * VARCHAR2(50), stock_prod NUMBER, precio_prod numeric(12,2), id_empleados
 			 * NUMBER
 			 */
-
+			Producto producto;
 			while (resultSet.next()) {
-				Producto producto = new Producto();
+				producto = new Producto();
 				producto.setIdProducto(resultSet.getInt(1));
 				producto.setNombreProducto(resultSet.getString(2));
 				producto.setDescripcionProducto(resultSet.getString(3));
@@ -131,6 +131,9 @@ public class GestorBDD extends Conexion {
 				productos.add(producto);
 				
 			}
+			
+				
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

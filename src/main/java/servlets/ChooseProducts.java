@@ -25,23 +25,25 @@ public class ChooseProducts extends HttpServlet {
      */
     public ChooseProducts() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		GestorBDD gdbb =new GestorBDD();
 		gdbb.abrirConexion();
-		ArrayList <Producto> productos = gdbb.pullProductos(" /**/ ");
-		
-		gdbb.abrirConexion();
-		
-		
+		ArrayList <Producto> productos = new ArrayList <Producto>();
+		productos=	gdbb.pullProductos(" /**/ ");
+		 
+		 
+		gdbb.cerrarConexion();
 		
 		request.setAttribute("productos", productos);
-		response.sendRedirect("ChooseProducts.jsp");
+		request.getRequestDispatcher("ChooseProducts.jsp").forward(request, response);
 	}
 
 	/**

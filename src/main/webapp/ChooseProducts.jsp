@@ -29,17 +29,13 @@ if(logedClient != null){ %>
 			<form action="ChooseProducts" method="post">
 				
 				<c:forEach items="${productos}" var="producto">
-				<label for="nombre">${producto.getNombreProducto()}</label>
-				<label for="descripcion">${producto.getDescripcionProducto()}</label>
-				<label for="precio">${producto.getPrecioProducto()}</label>
-				<label for="stock">${producto.getStockProducto()}</label>
-			
-				<input type="number" id="tockToSel${producto.getIdProducto()}" name="tockToSel${producto.getIdProducto()}" min="0" max="${producto.getStockProducto()}">  
+					<label for="nombre">${producto.getNombreProducto()}</label>
+					<label for="descripcion">${producto.getDescripcionProducto()}</label>
+					<label for="precio">${producto.getPrecioProducto()}</label>
+					<label for="stock">${producto.getStockProducto()}</label>
 				
-			
-			
-				
-				
+					<input type="number" id="tockToSel${producto.getIdProducto()}" name="tockToSel${producto.getIdProducto()}" min="0" max="${producto.getStockProducto()}">  
+					<br>
 				</c:forEach>
 				<input type="submit" name="DatosPedido" value="buy"/>
 			</form>
