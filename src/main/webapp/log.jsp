@@ -24,13 +24,16 @@
 				<label for="name">name</label>
 				<input type="text"  
 				name="nombre" id="nombre" 
-				value="nombre"><br>
+				value="nombre" onblur="if(this.value==""){this.value='nombre'";}"
+				onfocus="if(this.value=='nombre'){this.value='';}"><br>
 			
 			
 				<label for="password">password</label> 
 				<input type="text"  
 				name="contra" id="contra" 
-				value="contraseña"><br>
+				value="contraseña"
+				onblur="if(this.value==""){this.value='contraseña'";}"
+				onfocus="if(this.value=='contraseña'){this.value='';}"><br>
 				
 				<input type="submit" name="sumit" value="sumit"/>
 				

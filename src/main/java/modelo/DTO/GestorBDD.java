@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import modelo.DAO.Client;
 import modelo.DAO.Empleado;
+import modelo.DAO.Pedido;
 import modelo.DAO.Producto;
 
 public class GestorBDD extends Conexion {
@@ -135,4 +136,15 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
+	public ArrayList<Pedido> pullPedidos() {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		return null;
+	}
+
+	
+	
 }
