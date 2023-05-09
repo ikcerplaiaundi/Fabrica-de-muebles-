@@ -26,7 +26,7 @@ if(logedClient != null){ %>
 <%}%>
 
 
-			<form action="Principal" method="post">
+			<form action="ChooseProducts" method="post">
 				
 				<c:forEach items="${productos}" var="producto">
 				<label for="nombre">${producto.getNombreProducto()}</label>
@@ -34,14 +34,14 @@ if(logedClient != null){ %>
 				<label for="precio">${producto.getPrecioProducto()}</label>
 				<label for="stock">${producto.getStockProducto()}</label>
 			
-				<input type="number" id="tockToSel" name="tentacles${producto.getIdProducto()}" min="0" max="${producto.getStockProducto()}">  
+				<input type="number" id="tockToSel${producto.getIdProducto()}" name="tockToSel${producto.getIdProducto()}" min="0" max="${producto.getStockProducto()}">  
 				
 			
 			
 				
 				
 				</c:forEach>
-				<input type="submit" name="Datos de pedido" value="buy"/>
+				<input type="submit" name="DatosPedido" value="buy"/>
 			</form>
 			<br>
 			

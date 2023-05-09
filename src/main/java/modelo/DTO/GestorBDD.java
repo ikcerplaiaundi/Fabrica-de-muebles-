@@ -61,7 +61,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
-		System.out.println("Cliente craga");
+		
 		String selectClientes = "SELECT * FROM SYSTEM.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -99,10 +99,10 @@ public class GestorBDD extends Conexion {
 		}
 	}
 
-	public ArrayList<Producto> pullProductos(String were) {
+	public ArrayList<Producto> pullProductos(String where) {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String selectProductos = "SELECT * FROM SYSTEM.PRODUCTOS ";
-		if(were != null) {selectProductos.concat(were);}
+		if(where != null) {selectProductos.concat(where);}
 		
 		PreparedStatement mostrarProductos;
 		try {
@@ -111,8 +111,12 @@ public class GestorBDD extends Conexion {
 			ResultSet resultSet = mostrarProductos.executeQuery();
 
 			/*
-			 * ID_PRODUCTOS NOMBRE_PROD DECRIPCION_PROD STOCK_PROD PRECIO_PROD ID_PEDIDOS
-			 * FECHA_PEDIDO ID_EMPLEADOS
+			 * ID_productos NUMBER  primary key,
+    			nombre_prod VARCHAR2(50),
+    			decripcion_prod VARCHAR2(50),
+    			stock_prod NUMBER,
+    			precio_prod numeric(12,2),
+    			id_empleados NUMBER
 			 */
 
 			while (resultSet.next()) {
@@ -122,10 +126,9 @@ public class GestorBDD extends Conexion {
 				producto.setDescripcionProducto(resultSet.getString(3));
 				producto.setStockProducto(resultSet.getInt(4));
 				producto.setPrecioProducto(resultSet.getFloat(5));
-				producto.setIdPedidos(resultSet.getInt(6));
-				//producto.setFechaEntrada(resultSet.getString(7));
-				producto.setIdFabricante(resultSet.getInt(8));
+				producto.setIdFabricante(resultSet.getInt(6));
 				productos.add(producto);
+				System.out.println(resultSet.getInt(1));
 			}
 
 		} catch (SQLException e) {

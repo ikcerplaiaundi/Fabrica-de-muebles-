@@ -35,6 +35,7 @@ public class ChooseProducts extends HttpServlet {
 		GestorBDD gdbb =new GestorBDD();
 		gdbb.abrirConexion();
 		ArrayList <Producto> productos = gdbb.pullProductos(" /**/ ");
+		
 		gdbb.abrirConexion();
 		
 		
