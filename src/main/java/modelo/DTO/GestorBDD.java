@@ -37,8 +37,8 @@ public class GestorBDD extends Conexion {
 
 		}
 		// user in a client ?
-		String selectCLIENTES = "SELECT * FROM ap_Admin.CLIENTES WHERE NOMBRE_CLIENTE = '" + user.getNombre()
-				+ "' and REGISTRADO =1";
+		String selectCLIENTES = "SELECT * FROM ap_Admin.CLIENTES WHERE NOMBRE_CLIENTE ='" + user.getNombre()	+ "' and REGISTRADO = 1"
+				;
 		try {
 
 			PreparedStatement mostrarCLIENTES = super.BBDDcon.prepareStatement(selectCLIENTES);
@@ -47,7 +47,7 @@ public class GestorBDD extends Conexion {
 
 			while (resultSetCLI.next()) {
 				user.setId(resultSetCLI.getInt(1));
-
+				
 				Chek[2] = user.getNombre().equals(resultSetCLI.getString(3));
 
 				Chek[3] = user.getContra().equals(resultSetCLI.getString(6));
