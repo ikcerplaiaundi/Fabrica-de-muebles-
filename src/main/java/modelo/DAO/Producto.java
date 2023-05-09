@@ -13,58 +13,11 @@ public class Producto {
 	private double precioProd;
 	private int idEmpleado;
 	private int stockProd;
-	private int idPedidos;
+	
 	private ArrayList<Piezas> piezas = new <Piezas>ArrayList();
-//date for sql
-	private String pattern = "yyyy-MM-dd";
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-	private Date fechaPedido;
 
-// date
-	public Date getFechaEntrada() {
-		return fechaPedido;
-	}
 
-	public String getStringFechaEntrada() {
-		return "" + simpleDateFormat.format(this.fechaPedido);
-	}
 
-	public String getStringFechaEntrada(String patern) {
-		this.setPattern(patern);
-		return simpleDateFormat.format(this.fechaPedido);
-	}
-
-	public void setFechaEntrada(Date fechaEntrada) {
-		this.fechaPedido = fechaEntrada;
-	}
-
-	public void setFechaEntrada(String fechaEntrada) {
-		try {
-			this.fechaPedido = (Date) simpleDateFormat.parse(fechaEntrada);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public String getPattern() {
-		return pattern;
-
-	}
-
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
-		String auxdate = getStringFechaEntrada();
-		this.simpleDateFormat = new SimpleDateFormat(pattern);
-		this.setFechaEntrada(auxdate);
-	}
-
-	public SimpleDateFormat getSimpleDateFormat() {
-		return simpleDateFormat;
-	}
-
-	public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
-		this.simpleDateFormat = simpleDateFormat;
-	}
 
 //Simple attributes
 	public int getIdProducto() {
@@ -126,14 +79,6 @@ public class Producto {
 			this.stockProd = stockProducto;
 			return true;
 		}
-	}
-
-	public int getIdPedidos() {
-		return idPedidos;
-	}
-
-	public void setIdPedidos(int idPedidos) {
-		this.idPedidos = idPedidos;
 	}
 
 	public ArrayList<Piezas> getPiezas() {
