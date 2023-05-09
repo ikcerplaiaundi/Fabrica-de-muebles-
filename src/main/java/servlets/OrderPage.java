@@ -34,7 +34,7 @@ public class OrderPage extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		response.sendRedirect("log.jsp");
+		
 		
 	}
 
@@ -52,6 +52,8 @@ public class OrderPage extends HttpServlet {
 		ArrayList<Pedido> pedidos = gdbb.pullPedidos();
 		
 		request.setAttribute("pedidos", pedidos);
+		
+		response.sendRedirect("log.jsp");
 	}
 
 }
