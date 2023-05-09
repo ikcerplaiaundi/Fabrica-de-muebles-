@@ -8,18 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ESTAS?</h1>
 
 <form action="OrderPage" method="post">
 
+<h1>ESTAS?</h1>
 
-	<c:forEach var="pedidos" items="${pedidos}">
+	<c:forEach items="${pedidos}" var="pedidos">
 	
-	<lable for="IDPedido">${pedidos.getIDPedido()}</lable>
-	<lable for="FechaPedido">${pedidos.getFechaPedido()}</lable>
-	<lable for="CostoPedido">${pedidos.getCosto()}</lable>
-	<lable for="IDFactura">${pedidos.getIdFactura()}</lable>
-	
+	<p>${pedidos.getIDPedido)(}</p><br/>
+	<p>${pedidos.getFechaPedido()}</p><br/>
+	<p>${pedidos.getCosto()}</p><br/>
+	<p>${pedidos.getIdFactura()}</p><br/>
 	</c:forEach>
 </form>
 
