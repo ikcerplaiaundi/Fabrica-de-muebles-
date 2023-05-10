@@ -42,7 +42,8 @@ public class ClientManagement extends HttpServlet {
 		
 		gdbb.cerrarConexion();
 		
-		request.setAttribute("cliente", clientes);
+		request.setAttribute("clientes", clientes);
+		request.getRequestDispatcher("ClientManagement.jsp").forward(request, response);
 	}
 
 	/**

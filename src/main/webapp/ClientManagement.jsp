@@ -12,14 +12,13 @@
 
 	<form action="ClientManagement" method="post">
 	
-		<c:forEach items="${cliente}" var="clientes">
-			<label for="Id">${pedido.getIdPedido()}</label><br/>
-			<label for="Costo">${pedido.getCosto()}</label><br/>
-			<label for="factura">${pedido.getIdFactura()}</label><br/>
-			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
-			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
-			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
-			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
+		<c:forEach items="${clientes}" var="cliente">
+			<label for="Id">${cliente.getIdClient()}</label>
+			<label for="Costo">${cliente.getDireccionClient()}</label>
+			<label for="fecha">${cliente.getNombreClient()}</label>
+			<label for="fecha">${cliente.getContactoClient()}</label>
+			<label for="fecha">${cliente.getDniClient()}</label>
+			<label for="fecha">${cliente.getRegistrado()}</label><br/>
 		</c:forEach>
 	</form>
 </body>

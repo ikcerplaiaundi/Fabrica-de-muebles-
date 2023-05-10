@@ -150,6 +150,9 @@ public class GestorBDD extends Conexion {
 		//pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
+		
+		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES=1");
+		
 		if (where != null) {
 			pedidoseleccion.concat(where);
 		}
@@ -165,7 +168,7 @@ public class GestorBDD extends Conexion {
 				String palabra[] = new String[2];
 				palabra = resultSet.getString(2).split(" ");
 				pedido.setFechaPedido(palabra[0]);
-				// pedido.setClient(resultSet.getInt(3)); not required
+				pedido.setClient(pullClients.get(0));
 				pedido.setCosto(resultSet.getInt(5));
 				pedido.setIdFactura(resultSet.getInt(6));
 
@@ -178,6 +181,21 @@ public class GestorBDD extends Conexion {
 		}
 
 		return pedidos;
+	}
+	
+	public void updatePedidos(Pedido pedido) {
+		
+		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURA=? WHERE ID_PEDIDOS=?";
+		
+		try {
+			PreparedStatement modifyPedido = super.BBDDcon.prepareStatement(updateString);
+			
+			modifyPedido.setString(1, pedido.getStringFechaPedido());
+			//modifyPedido.setInt(2, pedido.getI);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	public ArrayList<Client> pullClients(String where) {
