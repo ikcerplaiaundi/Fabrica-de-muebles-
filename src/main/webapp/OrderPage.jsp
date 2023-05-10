@@ -25,6 +25,8 @@
 			<input type="text" id="Costo" value="${pedido.getCosto()}">
 			<lable for="Idcliente">Id cliente </lable>
 			<input type="text" id="Idcliente" value="${pedido.client.getIdClient()}">
+			<lable for="DireccionClient">Direccion cliente</lable>
+			<input type="text" id="DireccionClient" value="${pedido.client.getDireccionClient()}">
 			<label for="factura">Id factura</label>
 			<input type="text" id="factura" value="${pedido.getIdFactura()}">
 			<label for="fecha">Fecha pedido</label>

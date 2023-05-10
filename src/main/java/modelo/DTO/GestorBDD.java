@@ -184,11 +184,22 @@ public class GestorBDD extends Conexion {
 		
 		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURA=? WHERE ID_PEDIDOS=?";
 		
+		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES=1");
+		Client client = new Client();
+		
+		client = (pullClients.get(0));
+		
 		try {
 			PreparedStatement modifyPedido = super.BBDDcon.prepareStatement(updateString);
 			
 			modifyPedido.setString(1, pedido.getStringFechaPedido());
-			//modifyPedido.setInt(2, pedido.getI);
+			modifyPedido.setInt(2, client.getIdClient());
+			modifyPedido.setString(3, client.getDireccionClient());
+			modifyPedido.setDouble(4, pedido.getCosto());
+			modifyPedido.setInt(5, pedido.getIdFactura());
+			
+			modifyPedido.setInt(6, pedido.getIdPedido());
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
