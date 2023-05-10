@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.DAO.Client;
 import modelo.DAO.Producto;
+import modelo.DTO.GestorBDD;
 
 /**
  * Servlet implementation class BuyInfo
@@ -19,36 +21,64 @@ import modelo.DAO.Producto;
 @WebServlet("/BuyInfo")
 public class BuyInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BuyInfo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
-		double preciototal=0 ;
-		for (Producto producto : productosCompra) {
-			preciototal=preciototal + producto.getPrecioProducto();
-		}
-		session.setAttribute("preciototal", preciototal);
-		response.sendRedirect("BuyInfo.jsp");
-		
+	public BuyInfo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// calc total price
+		HttpSession session = request.getSession();
+		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
+		double preciototal = 0;
+		for (Producto producto : productosCompra) {
+			preciototal = preciototal + producto.getPrecioProducto();
+		}
+		session.setAttribute("preciototal", preciototal);
+		response.sendRedirect("BuyInfo.jsp");
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		GestorBDD gdbb = new GestorBDD();
+		HttpSession session = request.getSession();
+		Client logedClient = (Client) session.getAttribute("logedClient");
+		if (logedClient != null) {
+			logedClient.setDireccionClient(request.getParameter("Direccion"));
+			logedClient.setNombreClient(request.getParameter("name"));
+			logedClient.setContactoClient(request.getParameter("Contact"));
+			logedClient.setDniClient(request.getParameter("DNI"));
+			session.setAttribute("logedClient", logedClient);
+			gdbb.abrirConexion();
+			gdbb.updateCliente(logedClient);
+			gdbb.cerrarConexion();
+		}else {
+			Client cliente =new Client();
+			cliente.setDireccionClient(request.getParameter("Direccion"));
+			cliente.setNombreClient(request.getParameter("name"));
+			cliente.setContactoClient(request.getParameter("Contact"));
+			cliente.setDniClient(request.getParameter("DNI"));
+			gdbb.abrirConexion();
+			gdbb.pushCliente(cliente);
+			gdbb.cerrarConexion();
+		}
 		
-		doGet(request, response);
+		
+		
 	}
 
 }

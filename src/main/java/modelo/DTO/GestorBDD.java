@@ -131,9 +131,6 @@ public class GestorBDD extends Conexion {
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdFabricante(resultSet.getInt(6));
 
-
-				System.out.println(producto.getNombreProducto());
-
 				productos.add(producto);
 
 			}
@@ -227,6 +224,51 @@ public class GestorBDD extends Conexion {
 			e.printStackTrace();
 		}
 		return clientes;
+	}
+
+	public boolean updateCliente(Client Client) {
+		// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE
+		// REGISTRADO
+		//logedClient.setDireccionClient(request.getParameter("Direccion"));
+		//logedClient.setNombreClient(request.getParameter("name"));
+		//logedClient.setContactoClient(request.getParameter("Contact"));
+		//logedClient.setDniClient(request.getParameter("DNI"));
+		String updateClientes ="UPDATE ap_Admin.CLIENTES SET "
+				+ "DIRECCION_CLIENTES ='"+Client.getDireccionClient()
+				+ "',NOMBRE_CLIENTE ='"+Client.getNombreClient()
+				+ "',CONTACTO_CLIENTE ='"+Client.getContactoClient()
+				+ "',DNI_CLIENTE ='"+Client.getDniClient()
+				+ "',REGISTRADO ='"+Client.getRegistrado()
+				+"' WHERE ID_CLIENTES = "+Client.getIdClient();
+		PreparedStatement stUpdateClientes;
+		try {
+			stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
+			ResultSet resultSet = stUpdateClientes.executeQuery();
+			return true;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+		
+		
+	}
+
+	public boolean pushCliente(Client cliente) {
+		String INSERTClientes="INSERT INTO ap_Admin.clientes (ID_clientes, direccion_clientes, nombre_cliente, contacto_cliente, dni_cliente,CLI_PASWORD,registrado)VALUES (id_clientes_seq.NEXTVAL,'"+cliente.getDireccionClient()+"', '"+cliente.getNombreClient()+"', '"+cliente.getContactoClient()+"', '"+cliente.getDniClient()+"','"+cliente.getContraseñaClient()+"',"+cliente.getRegistrado()+")";
+		PreparedStatement stINSERTClientes;
+		try {
+			stINSERTClientes = super.BBDDcon.prepareStatement(INSERTClientes);
+			ResultSet resultSet = stINSERTClientes.executeQuery();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
