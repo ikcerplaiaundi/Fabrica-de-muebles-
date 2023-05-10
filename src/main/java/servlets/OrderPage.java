@@ -49,7 +49,7 @@ public class OrderPage extends HttpServlet {
 		
 		gdbb.abrirConexion();
 		
-		ArrayList<Pedido> pedidos = gdbb.pullPedidos();
+		ArrayList<Pedido> pedidos = gdbb.pullPedidos(" /**/ ");
 		
 		request.setAttribute("pedidos", pedidos);
 		

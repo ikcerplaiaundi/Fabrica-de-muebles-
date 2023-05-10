@@ -46,7 +46,7 @@ public class SellerPage extends HttpServlet {
 		
 		gdbb.abrirConexion();
 		
-		ArrayList<Pedido> pedidos = gdbb.pullPedidos();
+		ArrayList<Pedido> pedidos = gdbb.pullPedidos(" /**/ ");
 		
 	}
 
