@@ -144,12 +144,12 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
-	public ArrayList<Pedido> pullPedidos(String where) {
+	public ArrayList<Pedido> pullPedidos(String where,String whereClient) {
 		//pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		
-		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES=1");
+		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES="+whereClient);
 		
 		if (where != null) {
 			pedidoseleccion.concat(where);
@@ -201,6 +201,7 @@ public class GestorBDD extends Conexion {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		sqlCommit();
 	}
 
 	public ArrayList<Client> pullClients(String where) {
@@ -249,6 +250,7 @@ public class GestorBDD extends Conexion {
 				+ "',REGISTRADO ='"+Client.getRegistrado()
 				+"' WHERE ID_CLIENTES = "+Client.getIdClient();
 		PreparedStatement stUpdateClientes;
+		
 		try {
 			stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
 			ResultSet resultSet = stUpdateClientes.executeQuery();
@@ -258,7 +260,7 @@ public class GestorBDD extends Conexion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		sqlCommit();
 		
 		return false;
 		
