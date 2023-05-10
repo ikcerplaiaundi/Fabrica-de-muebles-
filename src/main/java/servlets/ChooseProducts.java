@@ -61,6 +61,8 @@ public class ChooseProducts extends HttpServlet {
 		for (Producto producto : productos) {
 			if (null != request.getParameter("" + producto.getIdProducto())&&("0"!=request.getParameter("" + producto.getIdProducto())&&(""!=request.getParameter("" + producto.getIdProducto())))) {
 				productoCompra=new Producto();
+				productoCompra.setPrecioProducto(producto.getPrecioProducto());
+				productoCompra.setNombreProducto(producto.getNombreProducto());
 				productoCompra.setIdProducto(producto.getIdProducto());
 				productoCompra.setStockProducto(Integer.parseInt(request.getParameter(""+producto.getIdProducto()))) ; 
 				
@@ -69,6 +71,7 @@ public class ChooseProducts extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("productosCompra", productosCompra);
+		
 		
 		// a que jsp?
 		response.sendRedirect("BuyInfo");

@@ -40,9 +40,13 @@ public class BuyInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
 		double preciototal = 0;
-		for (Producto producto : productosCompra) {
-			preciototal = preciototal + producto.getPrecioProducto();
+		if(productosCompra!=null) {
+			for (Producto producto : productosCompra) {
+				preciototal = preciototal + (producto.getPrecioProducto()*producto.getStockProducto());
+			}
 		}
+		preciototal=Math.round(preciototal*100);
+		preciototal=preciototal/100;
 		session.setAttribute("preciototal", preciototal);
 		response.sendRedirect("BuyInfo.jsp");
 

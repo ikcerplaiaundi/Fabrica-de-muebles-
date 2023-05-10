@@ -41,7 +41,7 @@ if(logedClient != null){ %>
 				<input type="submit" name="DatosPedido" value="confirmar compra"/>
 			</form>
 
-<h2>precio total</h2> <p>${session.getAttribute("preciototal")}</p>
+<h2>precio total</h2> <p><%=session.getAttribute("preciototal") %></p>
 
 <% ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra"); %>	
 	<h2>Producto a comprar</h2>
