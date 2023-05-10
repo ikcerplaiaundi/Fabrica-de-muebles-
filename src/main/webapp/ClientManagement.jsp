@@ -12,7 +12,7 @@
 
 	<form action="ClientManagement" method="post">
 	
-		<c:forEach items="${clientex}" var="clientes">
+		<c:forEach items="${cliente}" var="clientes">
 			<label for="Id">${pedido.getIdPedido()}</label><br/>
 			<label for="Costo">${pedido.getCosto()}</label><br/>
 			<label for="factura">${pedido.getIdFactura()}</label><br/>
@@ -20,7 +20,7 @@
 			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
 			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
 			<label for="fecha">${pedido.getFechaPedido()}</label><br/>
+		</c:forEach>
 	</form>
-
 </body>
 </html>

@@ -1,5 +1,6 @@
 package servlets;
 
+import java.awt.geom.Arc2D.Double;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -8,21 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import modelo.DAO.Client;
-import modelo.DTO.GestorBDD;
+import modelo.DAO.Producto;
 
 /**
- * Servlet implementation class ClientManagement
+ * Servlet implementation class BuyInfo
  */
-@WebServlet("/ClientManagement")
-public class ClientManagement extends HttpServlet {
+@WebServlet("/BuyInfo")
+public class BuyInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClientManagement() {
+    public BuyInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +32,22 @@ public class ClientManagement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
+		double preciototal=0 ;
+		for (Producto producto : productosCompra) {
+			preciototal=preciototal + producto.getPrecioProducto();
+		}
+		session.setAttribute("preciototal", preciototal);
+		response.sendRedirect("BuyInfo.jsp");
 		
-		GestorBDD gdbb = new GestorBDD();
-		
-		gdbb.abrirConexion();
-		
-		ArrayList<Client> clientes = gdbb.pullClients(" /**/ ");
-		
-		gdbb.cerrarConexion();
-		
-		request.setAttribute("cliente", clientes);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

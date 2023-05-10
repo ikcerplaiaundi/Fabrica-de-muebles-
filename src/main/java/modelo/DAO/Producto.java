@@ -50,6 +50,9 @@ public class Producto {
 
 	public boolean setPrecioProducto(double precioProducto) {
 		// a price can't be negative
+		
+		precioProducto=Math.round(precioProducto*100);
+		precioProducto=precioProducto/100;
 		if (precioProducto < 0) {
 			return false;
 		} else {

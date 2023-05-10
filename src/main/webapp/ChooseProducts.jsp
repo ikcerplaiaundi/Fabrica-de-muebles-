@@ -34,7 +34,7 @@ if(logedClient != null){ %>
 					<label for="precio">${producto.getPrecioProducto()}</label>
 					<label for="stock">${producto.getStockProducto()}</label>
 				
-					<input type="number" id="tockToSel${producto.getIdProducto()}" name="tockToSel${producto.getIdProducto()}" min="0" max="${producto.getStockProducto()}">  
+					<input type="number" id="${producto.getIdProducto()}" name="${producto.getIdProducto()}"  value="" min="0" max="${producto.getStockProducto()}">  
 					<br>
 				</c:forEach>
 				<input type="submit" name="DatosPedido" value="buy"/>
