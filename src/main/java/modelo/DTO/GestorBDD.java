@@ -130,12 +130,10 @@ public class GestorBDD extends Conexion {
 				producto.setStockProducto(resultSet.getInt(4));
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdFabricante(resultSet.getInt(6));
-<<<<<<< HEAD
+
 
 				System.out.println(producto.getNombreProducto());
-=======
-				
->>>>>>> branch 'master' of https://github.com/ikcerplaiaundi/Fabrica-de-muebles-.git
+
 				productos.add(producto);
 
 			}
