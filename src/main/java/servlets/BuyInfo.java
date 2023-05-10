@@ -40,11 +40,17 @@ public class BuyInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
 		double preciototal = 0;
-		for (Producto producto : productosCompra) {
-			preciototal = preciototal + producto.getPrecioProducto();
+		if(productosCompra!=null) {
+			for (Producto producto : productosCompra) {
+				preciototal = preciototal + (producto.getPrecioProducto()*producto.getStockProducto());
+			}
 		}
+		preciototal=Math.round(preciototal*100);
+		preciototal=preciototal/100;
+		
 		session.setAttribute("preciototal", preciototal);
-		response.sendRedirect("BuyInfo.jsp");
+		request.getRequestDispatcher("BuyInfo.jsp").forward(request, response);
+//		response.sendRedirect("");
 
 	}
 
@@ -56,17 +62,20 @@ public class BuyInfo extends HttpServlet {
 			throws ServletException, IOException {
 		GestorBDD gdbb = new GestorBDD();
 		HttpSession session = request.getSession();
+		
 		Client logedClient = (Client) session.getAttribute("logedClient");
-		if (logedClient != null) {
+		
+		if (logedClient != null) { //usuario logueado
 			logedClient.setDireccionClient(request.getParameter("Direccion"));
 			logedClient.setNombreClient(request.getParameter("name"));
 			logedClient.setContactoClient(request.getParameter("Contact"));
 			logedClient.setDniClient(request.getParameter("DNI"));
 			session.setAttribute("logedClient", logedClient);
+			
 			gdbb.abrirConexion();
 			gdbb.updateCliente(logedClient);
 			gdbb.cerrarConexion();
-		}else {
+		}else { //usuario no resgistrado
 			Client cliente =new Client();
 			cliente.setDireccionClient(request.getParameter("Direccion"));
 			cliente.setNombreClient(request.getParameter("name"));

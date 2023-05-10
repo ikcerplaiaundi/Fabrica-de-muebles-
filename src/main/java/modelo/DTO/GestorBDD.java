@@ -276,6 +276,20 @@ public class GestorBDD extends Conexion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		sqlCommit();
+		return false;
+	}
+	private boolean sqlCommit() {
+		String commit="commit";
+		PreparedStatement stcommit;
+		try {
+			stcommit = super.BBDDcon.prepareStatement(commit);
+			ResultSet resultSet = stcommit.executeQuery();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 

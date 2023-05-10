@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.DAO.Client;
+
 /**
  * Servlet implementation class LogDrive
  */
@@ -40,15 +42,35 @@ public class LogDrive extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
+		GDBB.abrirConexion();
+		checkLogin(request, response, GDBB);
+		Client client=new Client();
+		client.setContactoClient(request.getParameter("newContact"));
+		client.setNombreClient(request.getParameter("newname"));
+		client.setContraseñaClient(request.getParameter("newcontra"));
+		client.setDniClient(request.getParameter("newDNI"));
+		client.setDireccionClient(request.getParameter("newDireccion"));
+		client.setRegistrado(1);
+		GDBB.pushCliente(client);
+		
+		
+		
+		
+		GDBB.cerrarConexion();
+	}
 
+	private void checkLogin(HttpServletRequest request, HttpServletResponse response, modelo.DTO.GestorBDD GDBB)
+			throws IOException, ServletException {
+		
+		//
 		String Mensage = "inserte el usuario y contraseña";
 		modelo.DAO.User user = new modelo.DAO.User();
 
 		user.setNombre(request.getParameter("nombre"));
 		user.setContra(request.getParameter("contra"));
 
-		modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
-		GDBB.abrirConexion();
+		
 
 		// check
 		Boolean[] chek = GDBB.ChekUser(user);
@@ -88,7 +110,6 @@ public class LogDrive extends HttpServlet {
 			}
 
 		}
-
-		GDBB.cerrarConexion();
 	}
+	
 }
