@@ -19,6 +19,7 @@
 		
 		
 			<form action="LogDrive" method="post">
+			<h1>login</h1>
 			<label for="Mensage">${Mensage}</label><br>
 			
 				<label for="name">name</label>
@@ -40,8 +41,25 @@
 				
 			</form>
 			<br>
+		<h1>create acount</h1>
+		<form action="LogDrive" method="post">
 		
-		
+					<label for="newClient">datos de cliente:</label> <br>
+					<label for="newNombreClient">Nombre</label>
+					<input type="text" id="newname" name="newname" required value=""><br>
+					<label for="newpassword">password</label> 
+					<input type="newpassword"  name="newcontra" id="newcontra" value="">
+					<label for="ContactoClient">Contacto</label>
+					<input type="text" id="newContact" name="newContact" required value=""><br>
+					<label for="DniClient">DNI</label>
+					<input type="text" id="newDNI" name="newDNI" required value=""><br>
+					<label for="DireccionClient">Direccion</label>
+					<input type="text" id="newDireccion" name="newDireccion" required value=""><br>
+					  
+					<br>
+				
+				<input type="submit" name="DatosPedido" value="crear cuenta"/>
+			</form>
 		
 		
 	

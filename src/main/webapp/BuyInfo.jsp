@@ -25,7 +25,7 @@ if(logedClient != null){ %>
 
 <%}%>
 	
-			<form action="ChooseProducts" method="post">
+			<form action="BuyInfo" method="post">
 					<label for="Client">datos de cliente:</label> <br>
 					<label for="NombreClient">Nombre</label>
 					<input type="text" id="name" name="name" required value="${logedClient.getNombreClient()}"><br>
