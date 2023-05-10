@@ -37,7 +37,7 @@ public class Pedido {
 
 	public void setFechaPedido(String fechaPedido) {
 		try {
-			this.fechaPedido = (Date) simpleDateFormat.parse(fechaPedido);
+			this.fechaPedido = simpleDateFormat.parse(fechaPedido);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

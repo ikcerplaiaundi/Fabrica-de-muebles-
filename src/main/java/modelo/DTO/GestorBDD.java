@@ -1,5 +1,6 @@
 package modelo.DTO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -162,9 +163,7 @@ public class GestorBDD extends Conexion {
 				Pedido pedido = new Pedido();
 
 				pedido.setIdPedido(resultSet.getInt(1));
-				String palabra[] = new String[2];
-				palabra = resultSet.getString(2).split(" ");
-				pedido.setFechaPedido(palabra[0]);
+				pedido.setFechaPedido(resultSet.getDate(2));
 				pedido.setClient(pullClients.get(0));
 				pedido.setCosto(resultSet.getInt(5));
 				pedido.setIdFactura(resultSet.getInt(6));
@@ -184,15 +183,13 @@ public class GestorBDD extends Conexion {
 		
 		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURA=? WHERE ID_PEDIDOS=?";
 		
-		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES=1");
 		Client client = new Client();
-		
-		client = (pullClients.get(0));
+		client = pedido.getClient();
 		
 		try {
 			PreparedStatement modifyPedido = super.BBDDcon.prepareStatement(updateString);
 			
-			modifyPedido.setString(1, pedido.getStringFechaPedido());
+			modifyPedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
 			modifyPedido.setInt(2, client.getIdClient());
 			modifyPedido.setString(3, client.getDireccionClient());
 			modifyPedido.setDouble(4, pedido.getCosto());
@@ -202,7 +199,7 @@ public class GestorBDD extends Conexion {
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

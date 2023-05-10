@@ -16,25 +16,32 @@
 </head>
 <body>
 
-	<form action="OrderPage" method="post">
+	
 
 		<c:forEach items="${pedidos}" var="pedido">
+		<form action="OrderPage" method="post">
 			<lable for="Id">Id pedido </lable>
-			<input type="text" id="Id" value="${pedido.getIdPedido()}">
-			<label for="Costo">Coste pedido </label>
-			<input type="text" id="Costo" value="${pedido.getCosto()}">
-			<lable for="Idcliente">Id cliente </lable>
-			<input type="text" id="Idcliente" value="${pedido.client.getIdClient()}">
-			<lable for="DireccionClient">Direccion cliente</lable>
-			<input type="text" id="DireccionClient" value="${pedido.client.getDireccionClient()}">
-			<label for="factura">Id factura</label>
-			<input type="text" id="factura" value="${pedido.getIdFactura()}">
-			<label for="fecha">Fecha pedido</label>
-			<input type="text" id="fecha" value="${pedido.getFechaPedido()}">
+			<input type="text" id="Id" name="Id" value="${pedido.getIdPedido()}">
 			
-			<button type="button" class="btn btn-primary btn-sm">Modificar</button><br/>
+			<label for="Costo">Coste pedido </label>
+			<input type="text" id="Costo" name="Costo" value="${pedido.getCosto()}">
+			
+			<lable for="Idcliente">Id cliente </lable>
+			<input type="text" id="Idcliente" name="Idcliente" value="${pedido.client.getIdClient()}">
+			
+			<lable for="DireccionClient">Direccion cliente</lable>
+			<input type="text" id="DireccionClient" name="DireccionClient" value="${pedido.client.getDireccionClient()}">
+			
+			<label for="factura">Id factura</label>
+			<input type="text" id="factura" name="factura" value="${pedido.getIdFactura()}">
+			
+			<label for="fecha">Fecha pedido</label>
+			<input type="date" id="fecha" name="fecha" value="${pedido.getFechaPedido()}">
+			
+			<input type="submit" value="Modify"><br/>
+		</form>
 		</c:forEach>
-	</form>
+	
 
 </body>
 </html>

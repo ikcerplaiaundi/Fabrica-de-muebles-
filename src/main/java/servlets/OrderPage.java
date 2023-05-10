@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.DAO.Client;
 import modelo.DAO.Pedido;
 import modelo.DTO.GestorBDD;
 
@@ -55,11 +56,34 @@ public class OrderPage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 
+		GestorBDD gdbb = new GestorBDD();
+		gdbb.abrirConexion();
 		
+		Pedido pedido = new Pedido();
+		Client client = new Client();
 		
+		int id = Integer.parseInt(request.getParameter("Id"));
+		double costo = Double.parseDouble(request.getParameter("Costo"));
+		int idClient = Integer.parseInt(request.getParameter("Idcliente"));
+		String DireccionClient = request.getParameter("DireccionClient");
+		int idFactura = Integer.parseInt(request.getParameter("factura"));
+		String fecha = request.getParameter("fecha");
+		
+		client.setDireccionClient(DireccionClient);
+		client.setIdClient(idClient);
+		
+		pedido.setIdPedido(id);
+		pedido.setCosto(costo);
+		pedido.setIdFactura(idFactura);
+		pedido.setFechaPedido(fecha);
+		pedido.setClient(client);
+		
+		gdbb.updatePedidos(pedido);
+		
+		gdbb.cerrarConexion();
+		
+		request.getRequestDispatcher("OrderPage").forward(request, response);	
 	}
 
 }
