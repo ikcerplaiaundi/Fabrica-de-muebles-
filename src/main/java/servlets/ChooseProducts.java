@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.DAO.Producto;
 import modelo.DTO.GestorBDD;
@@ -33,7 +34,7 @@ public class ChooseProducts extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			//open and show all products
 		GestorBDD gdbb = new GestorBDD();
 		gdbb.abrirConexion();
 		ArrayList<Producto> productos = gdbb.pullProductos(" /**/ ");
@@ -49,24 +50,29 @@ public class ChooseProducts extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Search the stock of each product type for serl
+		//Search the stock of each product type for sell, and save how many of what type of products need
 		GestorBDD gdbb = new GestorBDD();
 		gdbb.abrirConexion();
 		ArrayList<Producto> productos = gdbb.pullProductos(" /**/ ");
 		gdbb.cerrarConexion();
 		ArrayList<Producto> productosCompra = new ArrayList<Producto>();
-		Producto producto;
+		Producto productoCompra;
 		
-		for (int i = 0; productos.size() > i; i++) {
-			if (null != request.getParameter("" + productos.get(i).getIdProducto())) {
-				producto = new Producto();
-				producto.setIdProducto(productos.get(i).getIdProducto());
-				producto.setStockProducto(
-						Integer.parseInt(request.getParameter("" + productos.get(i).getIdProducto())));
-				productosCompra.add(producto);
+		for (Producto producto : productos) {
+			if (null != request.getParameter("" + producto.getIdProducto())&&("0"!=request.getParameter("" + producto.getIdProducto())&&(""!=request.getParameter("" + producto.getIdProducto())))) {
+				productoCompra=new Producto();
+				productoCompra.setIdProducto(producto.getIdProducto());
+				productoCompra.setStockProducto(Integer.parseInt(request.getParameter(""+producto.getIdProducto()))) ; 
 				
+				productosCompra.add(productoCompra);
 			}
 		}
+		HttpSession session = request.getSession();
+		session.setAttribute("productosCompra", productosCompra);
+		
+		// a que jsp?
+		response.sendRedirect("BuyInfo");
+		
 
 	}
 }

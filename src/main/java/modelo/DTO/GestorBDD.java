@@ -12,7 +12,7 @@ import modelo.DAO.Producto;
 
 public class GestorBDD extends Conexion {
 	public Boolean[] ChekUser(modelo.DAO.User user) {
-		// cheking
+		//*@param cheking for log
 		Boolean[] Chek = new Boolean[4];
 		Chek[0] = false;
 		Chek[1] = false;
@@ -61,7 +61,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
-
+		//*@param pull the "Cliente" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -82,7 +82,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullEmpleado(Empleado empleado, modelo.DAO.User user) {
-		// TODO Auto-generated method stub
+		//*@param pull the "Empleado" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.EMPLEADOS WHERE ID_EMPLEADOS = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -100,6 +100,8 @@ public class GestorBDD extends Conexion {
 	}
 
 	public ArrayList<Producto> pullProductos(String where) {
+		
+		//*@param pull the "Productos" list and if is required add a condition"
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String selectProductos = "SELECT * FROM ap_Admin.PRODUCTOS ";
 		if (where != null) {
@@ -127,7 +129,6 @@ public class GestorBDD extends Conexion {
 				producto.setPrecioProducto(resultSet.getFloat(5));
 				producto.setIdFabricante(resultSet.getInt(6));
 				
-				System.out.println(producto.getNombreProducto());
 				productos.add(producto);
 				
 			}
@@ -136,7 +137,7 @@ public class GestorBDD extends Conexion {
 			
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -144,7 +145,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public ArrayList<Pedido> pullPedidos(String where) {
-
+		//pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		if (where != null) {
@@ -168,7 +169,7 @@ public class GestorBDD extends Conexion {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 			e.printStackTrace();
 		}
 
