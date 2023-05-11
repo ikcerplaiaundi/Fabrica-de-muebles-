@@ -95,7 +95,7 @@ public class GestorBDD extends Conexion {
 			empleado.setIdEmpleado(resultSet.getInt(1));
 			empleado.setNombreEmpleado(resultSet.getString(2));
 			empleado.setMgr(resultSet.getInt(3));
-			empleado.setRol(resultSet.getString(5).toUpperCase());
+			empleado.setRol(resultSet.getString(5));
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
