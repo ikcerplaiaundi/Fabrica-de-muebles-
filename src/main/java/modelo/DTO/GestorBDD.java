@@ -148,13 +148,9 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
-<<<<<<< HEAD
+
 	public ArrayList<Pedido> pullPedidos(String where) {
 		//pull the "Pedidos" list and if is required add a condition"
-=======
-	public ArrayList<Pedido> pullPedidos(String where,String whereClient) {
-		//@param pull the "Pedidos" list and if is required add a condition"
->>>>>>> branch 'master' of https://github.com/ikcerplaiaundi/Fabrica-de-muebles-.git
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		
