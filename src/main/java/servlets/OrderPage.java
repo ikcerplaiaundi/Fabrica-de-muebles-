@@ -42,7 +42,7 @@ public class OrderPage extends HttpServlet {
 		gdbb.abrirConexion();
 
 		ArrayList<Pedido> pedidos = gdbb.pullPedidos(" /**/ ");
-		
+
 		gdbb.cerrarConexion();
 
 		request.setAttribute("pedidos", pedidos);
@@ -59,31 +59,30 @@ public class OrderPage extends HttpServlet {
 
 		GestorBDD gdbb = new GestorBDD();
 		gdbb.abrirConexion();
-		
+
 		Pedido pedido = new Pedido();
 		Client client = new Client();
-		
+
 		int id = Integer.parseInt(request.getParameter("Id"));
 		double costo = Double.parseDouble(request.getParameter("Costo"));
 		int idClient = Integer.parseInt(request.getParameter("Idcliente"));
 		String DireccionClient = request.getParameter("DireccionClient");
 		int idFactura = Integer.parseInt(request.getParameter("factura"));
 		String fecha = request.getParameter("fecha");
-		
+
 		client.setDireccionClient(DireccionClient);
 		client.setIdClient(idClient);
-		
+
 		pedido.setIdPedido(id);
 		pedido.setCosto(costo);
 		pedido.setIdFactura(idFactura);
 		pedido.setFechaPedido(fecha);
 		pedido.setClient(client);
-		
-		gdbb.updatePedidos(pedido);
-		
-		gdbb.cerrarConexion();
-		
-		request.getRequestDispatcher("OrderPage").forward(request, response);	
-	}
 
+		gdbb.updatePedidos(pedido);
+
+		gdbb.cerrarConexion();
+
+		response.sendRedirect("OrderPage");
+	}
 }

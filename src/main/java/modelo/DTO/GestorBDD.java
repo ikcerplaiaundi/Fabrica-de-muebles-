@@ -185,7 +185,9 @@ public class GestorBDD extends Conexion {
 	
 	public void updatePedidos(Pedido pedido) {
 		//*@param update "pedidos" table's row by id
-		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURA=? WHERE ID_PEDIDOS=?";
+
+		
+		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=? WHERE ID_PEDIDOS=?";
 		
 		Client client = new Client();
 		client = pedido.getClient();
@@ -201,7 +203,7 @@ public class GestorBDD extends Conexion {
 			
 			modifyPedido.setInt(6, pedido.getIdPedido());
 			
-			
+			modifyPedido.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

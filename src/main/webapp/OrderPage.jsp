@@ -19,7 +19,7 @@
 	
 
 		<c:forEach items="${pedidos}" var="pedido">
-		<form action="OrderPage" method="post">
+		<form method="post" action="OrderPage">
 			<lable for="Id">Id pedido </lable>
 			<input type="text" id="Id" name="Id" value="${pedido.getIdPedido()}">
 			
