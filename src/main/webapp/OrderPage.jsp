@@ -28,6 +28,7 @@ if(logedEmpleado != null){ %>
 </p>
 	
 	<div class="Pedidos">
+	<h1>Pedidos</h1>
 		<c:forEach items="${pedidos}" var="pedido">
 		<form method="post" action="OrderPage">
 			<lable for="Id">Id pedido </lable>
@@ -52,6 +53,27 @@ if(logedEmpleado != null){ %>
 		</form>
 		</c:forEach>
 	</div>
+	<h1>Crear un pedido nuevo</h1>
+	<div class="PedidoNuevo">
+		<form action="CreateOrder" method="post">
+			
+			<label for="Idcliente">ID cliente</label>
+			<input type="text" id="Idcliente" name="Idcliente">
+			
+			<label for="Idfactura">ID factura</label>
+			<input type="text" id="Idfactura" name="Idfactura">
+			
+			<lable for="Costo">Coste de pedido</lable>
+			<input type="text" id="Costo" name="Costo">
+			
+			<lable for="fecha">Fecha pedido</lable>
+			<input type="date" id="fecha" name="fecha">
+			
+			<input type="submit" value="Crear pedido">
+		</form>
+	</div>
+	
+	
 <%}else{ %>
 
 <a href="LogDrive">login or create</a>

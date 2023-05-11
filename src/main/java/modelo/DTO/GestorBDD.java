@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import modelo.DAO.Client;
 import modelo.DAO.Empleado;
 import modelo.DAO.Pedido;
@@ -15,7 +13,7 @@ import modelo.DAO.Producto;
 
 public class GestorBDD extends Conexion {
 	public Boolean[] ChekUser(modelo.DAO.User user) {
-		//@param cheking for log
+		// @param cheking for log
 		Boolean[] Chek = new Boolean[4];
 		Chek[0] = false;
 		Chek[1] = false;
@@ -27,12 +25,12 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement mostrarEMPLEADOS = super.BBDDcon.prepareStatement(selectEMPLEADOS);
 			ResultSet resultSetEMP = mostrarEMPLEADOS.executeQuery();
-			
+
 			while (resultSetEMP.next()) {
 				Chek[0] = user.getNombre().equals(resultSetEMP.getString(2));
-           
-				user.setId(resultSetEMP.getInt(1));   
-            
+
+				user.setId(resultSetEMP.getInt(1));
+
 				Chek[1] = user.getContra().equals(resultSetEMP.getString(4));
 			}
 			// sort-cut
@@ -67,7 +65,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
-		//@param pull the "Cliente" specified "
+		// @param pull the "Cliente" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -88,27 +86,27 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullEmpleado(Empleado empleado, modelo.DAO.User user) {
-		//@param pull the "Empleado" specified "
+		// @param pull the "Empleado" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.EMPLEADOS WHERE ID_EMPLEADOS = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
 			resultSet.next();
-			
+
 			// ID_EMPLEADOS NOMBRE_EMPLEADO MGR EMP_PASWORD ROL
 			empleado.setIdEmpleado(resultSet.getInt(1));
 			empleado.setNombreEmpleado(resultSet.getString(2));
 			empleado.setMgr(resultSet.getInt(3));
 			empleado.setRol(resultSet.getString(5));
-			
+
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 	}
 
 	public ArrayList<Producto> pullProductos(String where) {
-		
-		//@param pull the "Productos" list and if is required add a condition"
+
+		// @param pull the "Productos" list and if is required add a condition"
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String selectProductos = "SELECT * FROM ap_Admin.PRODUCTOS ";
 		if (where != null) {
@@ -141,22 +139,20 @@ public class GestorBDD extends Conexion {
 			}
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
 		return productos;
 	}
 
-
 	public ArrayList<Pedido> pullPedidos(String where) {
-		//pull the "Pedidos" list and if is required add a condition"
-
+		// pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
-		
+
 		ArrayList<Client> pullClients = pullClients(" /**/");
-		
+
 		if (where != null) {
 			pedidoseleccion.concat(where);
 		}
@@ -178,33 +174,32 @@ public class GestorBDD extends Conexion {
 			}
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
 		return pedidos;
 	}
-	
-	public void updatePedidos(Pedido pedido) {
-		//*@param update "pedidos" table's row by id
 
-		
-		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=? WHERE ID_PEDIDOS=?";
-		
+	public void updatePedidos(Pedido pedido) {
+		// *@param update "pedidos" table's row by id
+
+		String updateString = "UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=? WHERE ID_PEDIDOS=?";
+
 		Client client = new Client();
 		client = pedido.getClient();
-		
+
 		try {
 			PreparedStatement modifyPedido = super.BBDDcon.prepareStatement(updateString);
-			
+
 			modifyPedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
 			modifyPedido.setInt(2, client.getIdClient());
 			modifyPedido.setString(3, client.getDireccionClient());
 			modifyPedido.setDouble(4, pedido.getCosto());
 			modifyPedido.setInt(5, pedido.getIdFactura());
-			
+
 			modifyPedido.setInt(6, pedido.getIdPedido());
-			
+
 			modifyPedido.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -212,13 +207,36 @@ public class GestorBDD extends Conexion {
 		sqlCommit();
 	}
 
-	public ArrayList<Client> pullClients(String where) {
-		//*@param do a select all flom "Clientes" table
-		ArrayList<Client> clientes = new ArrayList<Client>();
-		String clientesselecion = "SELECT * FROM ap_Admin.CLIENTES";
-		if (where != null) {
-			clientesselecion.concat(where);
+	public void pushPedidos(Pedido pedido) {
+
+		String insertarPedido = "INSERT INTO pa_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=?";
+
+		Client client = new Client();
+		client = pedido.getClient();
+
+		try {
+			PreparedStatement stinsertpedido = super.BBDDcon.prepareStatement(insertarPedido);
+
+			stinsertpedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
+			stinsertpedido.setInt(2, client.getIdClient());
+			stinsertpedido.setString(3, client.getDireccionClient());
+			stinsertpedido.setDouble(4, pedido.getCosto());
+			stinsertpedido.setInt(5, pedido.getIdFactura());
+
+			stinsertpedido.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		sqlCommit();
+	}
+
+	public ArrayList<Client> pullClients(String where) {
+		// *@param do a select all flom "Clientes" table
+		ArrayList<Client> clientes = new ArrayList<Client>();
+		String clientesselecion = "SELECT * FROM ap_Admin.CLIENTES  ";
+
+		clientesselecion = clientesselecion + where;
 
 		try {
 
@@ -243,66 +261,84 @@ public class GestorBDD extends Conexion {
 		return clientes;
 	}
 
-	public boolean updateCliente(Client Client) {
-		//*@param update "Clientes" table's row by id
-		// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE REGISTRADO
- 
-		//logedClient.setDireccionClient(request.getParameter("Direccion"));
-		//logedClient.setNombreClient(request.getParameter("name"));
-		//logedClient.setContactoClient(request.getParameter("Contact"));
-		//logedClient.setDniClient(request.getParameter("DNI"));
-		String updateClientes ="UPDATE ap_Admin.CLIENTES SET "
-				+ "DIRECCION_CLIENTES ='"+Client.getDireccionClient()
-				+ "',NOMBRE_CLIENTE ='"+Client.getNombreClient()
-				+ "',CONTACTO_CLIENTE ='"+Client.getContactoClient()
-				+ "',DNI_CLIENTE ='"+Client.getDniClient()
-				+ "',REGISTRADO ='"+Client.getRegistrado()
-				+"' WHERE ID_CLIENTES = "+Client.getIdClient();
-		PreparedStatement stUpdateClientes;
-		
+	public void updateCliente(Client client) {
+		// *@param update "Clientes" table's row by id
+		String updateClientes = "UPDATE ap_Admin.CLIENTES SET DIRECCION_CLIENTES =?, NOMBRE_CLIENTE =?, CONTACTO_CLIENTE =?, DNI_CLIENTE =? WHERE ID_CLIENTES =?";
+
 		try {
-			stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
-			ResultSet resultSet = stUpdateClientes.executeQuery();
-			return true;
-		
+			PreparedStatement stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
+
+			stUpdateClientes.setString(1, client.getDireccionClient());
+			stUpdateClientes.setString(2, client.getNombreClient());
+			stUpdateClientes.setString(3, client.getContactoClient());
+			stUpdateClientes.setString(4, client.getDniClient());
+
+			stUpdateClientes.setInt(5, client.getIdClient());
+
+			stUpdateClientes.execute();
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		sqlCommit();
-		
-		return false;
-		
-		
+
 	}
 
 	public boolean pushCliente(Client cliente) {
-		//*@param insert client data for register or for 
-		String INSERTClientes="INSERT INTO ap_Admin.clientes (ID_clientes, direccion_clientes, nombre_cliente, contacto_cliente, dni_cliente,CLI_PASWORD,registrado)VALUES (id_clientes_seq.NEXTVAL,'"+cliente.getDireccionClient()+"', '"+cliente.getNombreClient()+"', '"+cliente.getContactoClient()+"', '"+cliente.getDniClient()+"','"+cliente.getContraseñaClient()+"',"+cliente.getRegistrado()+")";
+		// *@param insert client data for register or for
+		String INSERTClientes = "INSERT INTO ap_Admin.clientes (ID_clientes, direccion_clientes, nombre_cliente, contacto_cliente, dni_cliente,CLI_PASWORD,registrado)VALUES (id_clientes_seq.NEXTVAL,'"
+				+ cliente.getDireccionClient() + "', '" + cliente.getNombreClient() + "', '"
+				+ cliente.getContactoClient() + "', '" + cliente.getDniClient() + "','" + cliente.getContraseñaClient()
+				+ "'," + cliente.getRegistrado() + ")";
 		PreparedStatement stINSERTClientes;
 		try {
 			stINSERTClientes = super.BBDDcon.prepareStatement(INSERTClientes);
-			 stINSERTClientes.execute();
+			stINSERTClientes.execute();
 			return true;
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		sqlCommit();
 		return false;
 	}
+
 	private boolean sqlCommit() {
-		String commit="commit";
+		String commit = "commit";
 		PreparedStatement stcommit;
 		try {
 			stcommit = super.BBDDcon.prepareStatement(commit);
-			 stcommit.execute();
+			stcommit.execute();
 			return true;
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void pullClienteViaId(Client client) {
+		// @param pull the "Cliente" specified "
+		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES=?";
+		try {
+			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
+			mostrarUsuarios.setInt(1, client.getIdClient());
+			
+			ResultSet resultSet = mostrarUsuarios.executeQuery();
+			resultSet.next();
+			// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE
+			// REGISTRADO
+			client.setIdClient(resultSet.getInt(1));
+			client.setDireccionClient(resultSet.getString(2));
+			client.setNombreClient(resultSet.getString(3));
+			client.setContactoClient(resultSet.getString(4));
+			client.setDniClient(resultSet.getString(5));
+			client.setRegistrado(resultSet.getInt(7));
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }
