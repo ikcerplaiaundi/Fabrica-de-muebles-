@@ -15,7 +15,7 @@ import modelo.DAO.Producto;
 
 public class GestorBDD extends Conexion {
 	public Boolean[] ChekUser(modelo.DAO.User user) {
-		//*@param cheking for log
+		//@param cheking for log
 		Boolean[] Chek = new Boolean[4];
 		Chek[0] = false;
 		Chek[1] = false;
@@ -67,7 +67,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullCliente(Client client, modelo.DAO.User user) {
-		//*@param pull the "Cliente" specified "
+		//@param pull the "Cliente" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -88,7 +88,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void pullEmpleado(Empleado empleado, modelo.DAO.User user) {
-		//*@param pull the "Empleado" specified "
+		//@param pull the "Empleado" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.EMPLEADOS WHERE ID_EMPLEADOS = '" + user.getId() + "'";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
@@ -108,7 +108,7 @@ public class GestorBDD extends Conexion {
 
 	public ArrayList<Producto> pullProductos(String where) {
 		
-		//*@param pull the "Productos" list and if is required add a condition"
+		//@param pull the "Productos" list and if is required add a condition"
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String selectProductos = "SELECT * FROM ap_Admin.PRODUCTOS ";
 		if (where != null) {
@@ -148,8 +148,13 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<Pedido> pullPedidos(String where) {
 		//pull the "Pedidos" list and if is required add a condition"
+=======
+	public ArrayList<Pedido> pullPedidos(String where,String whereClient) {
+		//@param pull the "Pedidos" list and if is required add a condition"
+>>>>>>> branch 'master' of https://github.com/ikcerplaiaundi/Fabrica-de-muebles-.git
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		
@@ -184,6 +189,8 @@ public class GestorBDD extends Conexion {
 	}
 	
 	public void updatePedidos(Pedido pedido) {
+		//*@param update "pedidos" table's row by id
+
 		
 		String updateString="UPDATE ap_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=? WHERE ID_PEDIDOS=?";
 		
@@ -209,7 +216,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public ArrayList<Client> pullClients(String where) {
-
+		//*@param do a select all flom "Clientes" table
 		ArrayList<Client> clientes = new ArrayList<Client>();
 		String clientesselecion = "SELECT * FROM ap_Admin.CLIENTES";
 		if (where != null) {
@@ -240,8 +247,9 @@ public class GestorBDD extends Conexion {
 	}
 
 	public boolean updateCliente(Client Client) {
-		// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE
-		// REGISTRADO
+		//*@param update "Clientes" table's row by id
+		// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE REGISTRADO
+ 
 		//logedClient.setDireccionClient(request.getParameter("Direccion"));
 		//logedClient.setNombreClient(request.getParameter("name"));
 		//logedClient.setContactoClient(request.getParameter("Contact"));
@@ -261,7 +269,7 @@ public class GestorBDD extends Conexion {
 			return true;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		sqlCommit();
@@ -272,14 +280,15 @@ public class GestorBDD extends Conexion {
 	}
 
 	public boolean pushCliente(Client cliente) {
+		//*@param insert client data for register or for 
 		String INSERTClientes="INSERT INTO ap_Admin.clientes (ID_clientes, direccion_clientes, nombre_cliente, contacto_cliente, dni_cliente,CLI_PASWORD,registrado)VALUES (id_clientes_seq.NEXTVAL,'"+cliente.getDireccionClient()+"', '"+cliente.getNombreClient()+"', '"+cliente.getContactoClient()+"', '"+cliente.getDniClient()+"','"+cliente.getContraseñaClient()+"',"+cliente.getRegistrado()+")";
 		PreparedStatement stINSERTClientes;
 		try {
 			stINSERTClientes = super.BBDDcon.prepareStatement(INSERTClientes);
-			ResultSet resultSet = stINSERTClientes.executeQuery();
+			 stINSERTClientes.execute();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		sqlCommit();
@@ -290,10 +299,10 @@ public class GestorBDD extends Conexion {
 		PreparedStatement stcommit;
 		try {
 			stcommit = super.BBDDcon.prepareStatement(commit);
-			ResultSet resultSet = stcommit.executeQuery();
+			 stcommit.execute();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return false;

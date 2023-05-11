@@ -42,21 +42,12 @@ public class LogDrive extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
         modelo.DTO.GestorBDD GDBB = new modelo.DTO.GestorBDD();
 		GDBB.abrirConexion();
+		
 		checkLogin(request, response, GDBB);
-		Client client=new Client();
-		client.setContactoClient(request.getParameter("newContact"));
-		client.setNombreClient(request.getParameter("newname"));
-		client.setContraseñaClient(request.getParameter("newcontra"));
-		client.setDniClient(request.getParameter("newDNI"));
-		client.setDireccionClient(request.getParameter("newDireccion"));
-		client.setRegistrado(1);
-		GDBB.pushCliente(client);
-		
-		
-		
-		
+
 		GDBB.cerrarConexion();
 	}
 
@@ -91,7 +82,9 @@ public class LogDrive extends HttpServlet {
 			// a que jsp?
 			response.sendRedirect("ChooseProducts");
 		} else {
-
+			
+			
+			
 			if ((chek[1]) && (chek[0])) {
 				modelo.DAO.Empleado empleado = new modelo.DAO.Empleado();
 				GDBB.pullEmpleado(empleado, user);
@@ -111,7 +104,17 @@ public class LogDrive extends HttpServlet {
 				}
 				
 			} else {
-
+				Client client=new Client();
+			//catch the register data if exist
+				if( request.getParameter("newcontra")!=null) {
+				client.setContactoClient(request.getParameter("newContact"));
+				client.setNombreClient(request.getParameter("newname"));
+				client.setContraseñaClient(request.getParameter("newcontra"));
+				client.setDniClient(request.getParameter("newDNI"));
+				client.setDireccionClient(request.getParameter("newDireccion"));
+				client.setRegistrado(1);
+			
+				GDBB.pushCliente(client);}
 				// enviar datos
 				request.setAttribute("Mensage", Mensage);
 				// a que jsp?
