@@ -28,6 +28,7 @@ if(logedEmpleado != null){ %>
 </p>
 	
 	<div class="Pedidos">
+	<h1>Pedidos</h1>
 		<c:forEach items="${pedidos}" var="pedido">
 		<form method="post" action="OrderPage">
 			<lable for="Id">Id pedido </lable>
