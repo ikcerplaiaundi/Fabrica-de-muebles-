@@ -27,9 +27,12 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement mostrarEMPLEADOS = super.BBDDcon.prepareStatement(selectEMPLEADOS);
 			ResultSet resultSetEMP = mostrarEMPLEADOS.executeQuery();
+			
 			while (resultSetEMP.next()) {
 				Chek[0] = user.getNombre().equals(resultSetEMP.getString(2));
-
+           
+				user.setId(resultSetEMP.getInt(1));   
+            
 				Chek[1] = user.getContra().equals(resultSetEMP.getString(4));
 			}
 			// sort-cut
@@ -91,12 +94,13 @@ public class GestorBDD extends Conexion {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
 			resultSet.next();
+			
 			// ID_EMPLEADOS NOMBRE_EMPLEADO MGR EMP_PASWORD ROL
 			empleado.setIdEmpleado(resultSet.getInt(1));
 			empleado.setNombreEmpleado(resultSet.getString(2));
 			empleado.setMgr(resultSet.getInt(3));
 			empleado.setRol(resultSet.getString(5));
-
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
