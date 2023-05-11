@@ -207,6 +207,30 @@ public class GestorBDD extends Conexion {
 		sqlCommit();
 	}
 
+	public void pushPedidos(Pedido pedido) {
+
+		String insertarPedido = "INSERT INTO pa_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=?";
+
+		Client client = new Client();
+		client = pedido.getClient();
+
+		try {
+			PreparedStatement stinsertpedido = super.BBDDcon.prepareStatement(insertarPedido);
+
+			stinsertpedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
+			stinsertpedido.setInt(2, client.getIdClient());
+			stinsertpedido.setString(3, client.getDireccionClient());
+			stinsertpedido.setDouble(4, pedido.getCosto());
+			stinsertpedido.setInt(5, pedido.getIdFactura());
+
+			stinsertpedido.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		sqlCommit();
+	}
+
 	public ArrayList<Client> pullClients(String where) {
 		// *@param do a select all flom "Clientes" table
 		ArrayList<Client> clientes = new ArrayList<Client>();
@@ -240,19 +264,19 @@ public class GestorBDD extends Conexion {
 	public void updateCliente(Client client) {
 		// *@param update "Clientes" table's row by id
 		String updateClientes = "UPDATE ap_Admin.CLIENTES SET DIRECCION_CLIENTES =?, NOMBRE_CLIENTE =?, CONTACTO_CLIENTE =?, DNI_CLIENTE =? WHERE ID_CLIENTES =?";
-		
+
 		try {
 			PreparedStatement stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
-			
+
 			stUpdateClientes.setString(1, client.getDireccionClient());
 			stUpdateClientes.setString(2, client.getNombreClient());
 			stUpdateClientes.setString(3, client.getContactoClient());
 			stUpdateClientes.setString(4, client.getDniClient());
-			
+
 			stUpdateClientes.setInt(5, client.getIdClient());
-			
+
 			stUpdateClientes.execute();
-			
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -260,7 +284,7 @@ public class GestorBDD extends Conexion {
 		sqlCommit();
 
 	}
-	
+
 	public boolean pushCliente(Client cliente) {
 		// *@param insert client data for register or for
 		String INSERTClientes = "INSERT INTO ap_Admin.clientes (ID_clientes, direccion_clientes, nombre_cliente, contacto_cliente, dni_cliente,CLI_PASWORD,registrado)VALUES (id_clientes_seq.NEXTVAL,'"
@@ -292,6 +316,29 @@ public class GestorBDD extends Conexion {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void pullClienteViaId(Client client) {
+		// @param pull the "Cliente" specified "
+		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES=?";
+		try {
+			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
+			mostrarUsuarios.setInt(1, client.getIdClient());
+			
+			ResultSet resultSet = mostrarUsuarios.executeQuery();
+			resultSet.next();
+			// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE
+			// REGISTRADO
+			client.setIdClient(resultSet.getInt(1));
+			client.setDireccionClient(resultSet.getString(2));
+			client.setNombreClient(resultSet.getString(3));
+			client.setContactoClient(resultSet.getString(4));
+			client.setDniClient(resultSet.getString(5));
+			client.setRegistrado(resultSet.getInt(7));
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }
