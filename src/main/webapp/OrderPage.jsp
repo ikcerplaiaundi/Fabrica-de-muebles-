@@ -2,6 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="modelo.DAO.Pedido" %>
 <%@ page import="modelo.DAO.Client" %>
+ <%@page import="modelo.DAO.Empleado"%>
+ <%@page import="java.util.*" session="true" %>
+ <%@page import="javax.servlet.http.HttpSession"%>
  <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -16,8 +19,15 @@
 </head>
 <body>
 
+<%
+Empleado logedEmpleado =new Empleado();
+logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
+if(logedEmpleado != null){ %>
+<p>
+<% out.print(logedEmpleado.getNombreEmpleado());%> 
+</p>
 	
-
+	<div class="Pedidos">
 		<c:forEach items="${pedidos}" var="pedido">
 		<form method="post" action="OrderPage">
 			<lable for="Id">Id pedido </lable>
@@ -41,7 +51,12 @@
 			<input type="submit" value="Modify"><br/>
 		</form>
 		</c:forEach>
-	
+	</div>
+<%}else{ %>
+
+<a href="LogDrive">login or create</a>
+
+<%}%>
 
 </body>
 </html>

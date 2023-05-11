@@ -38,11 +38,13 @@ public class ClientManagement extends HttpServlet {
 		
 		gdbb.abrirConexion();
 		
-		ArrayList<Client> clientes = gdbb.pullClients(" /**/ ");
+		ArrayList<Client> clientesregistrados = gdbb.pullClients("WHERE REGISTRADO=1");
+		
+		ArrayList<Client> clientesnoregistrados = gdbb.pullClients("WHERE REGISTRADO!=1");
 		
 		gdbb.cerrarConexion();
 		
-		request.setAttribute("clientes", clientes);
+		request.setAttribute("clientes", clientesregistrados);
 		request.getRequestDispatcher("ClientManagement.jsp").forward(request, response);
 	}
 

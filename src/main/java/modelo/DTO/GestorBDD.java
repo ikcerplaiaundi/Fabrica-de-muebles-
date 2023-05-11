@@ -148,12 +148,12 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
-	public ArrayList<Pedido> pullPedidos(String where,String whereClient) {
+	public ArrayList<Pedido> pullPedidos(String where) {
 		//pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		
-		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES="+whereClient);
+		ArrayList<Client> pullClients = pullClients(" /**/");
 		
 		if (where != null) {
 			pedidoseleccion.concat(where);
