@@ -11,17 +11,18 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+<link rel="stylesheet"  href="style/logStyle.css">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>formulario</h1>
+
 	
 		
 		
-			<form action="LogDrive" method="post">
-			<h1>login</h1>
-			<label for="Mensage">${Mensage}</label><br>
+			<form action="LogDrive" class="border border-1 rounded-3 border border-secondary" method="post">
 			
+			<label for="Mensage">${Mensage}</label><br>
+				<h1>login</h1>
 				<label for="name">name</label>
 				<input type="text"  
 				name="nombre" id="nombre" 
@@ -36,19 +37,19 @@
 				onblur="if(this.value==""){this.value='contraseña'";}"
 				onfocus="if(this.value=='contraseña'){this.value='';}"><br>
 				
-				<input type="submit" name="sumit" value="sumit"/>
+				<input type="submit" name="log in" value="log in"/>
 				
 				
 			</form>
-			<br>
-		<h1>create acount</h1>
-		<form action="LogDrive" method="post">
+			
 		
+		<form action="LogDrive" class="border border-1 rounded-3 border border-secondary" method="post">
+				<h1>create acount</h1>
 					<label for="newClient">datos de cliente:</label> <br>
 					<label for="newNombreClient">Nombre</label>
 					<input type="text" id="newname" name="newname" required value=""><br>
 					<label for="newpassword">password</label> 
-					<input type="newpassword"  name="newcontra" id="newcontra" value="">
+					<input type="newpassword"  name="newcontra" id="newcontra" value=""><br>
 					<label for="ContactoClient">Contacto</label>
 					<input type="text" id="newContact" name="newContact" required value=""><br>
 					<label for="DniClient">DNI</label>
