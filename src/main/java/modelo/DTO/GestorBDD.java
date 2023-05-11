@@ -27,9 +27,12 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement mostrarEMPLEADOS = super.BBDDcon.prepareStatement(selectEMPLEADOS);
 			ResultSet resultSetEMP = mostrarEMPLEADOS.executeQuery();
+			
 			while (resultSetEMP.next()) {
 				Chek[0] = user.getNombre().equals(resultSetEMP.getString(2));
-
+           
+				user.setId(resultSetEMP.getInt(1));   
+            
 				Chek[1] = user.getContra().equals(resultSetEMP.getString(4));
 			}
 			// sort-cut
@@ -91,12 +94,13 @@ public class GestorBDD extends Conexion {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
 			resultSet.next();
+			
 			// ID_EMPLEADOS NOMBRE_EMPLEADO MGR EMP_PASWORD ROL
 			empleado.setIdEmpleado(resultSet.getInt(1));
 			empleado.setNombreEmpleado(resultSet.getString(2));
 			empleado.setMgr(resultSet.getInt(3));
-			empleado.setRol(resultSet.getString(5).toUpperCase());
-
+			empleado.setRol(resultSet.getString(5));
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -144,12 +148,12 @@ public class GestorBDD extends Conexion {
 		return productos;
 	}
 
-	public ArrayList<Pedido> pullPedidos(String where) {
+	public ArrayList<Pedido> pullPedidos(String where,String whereClient) {
 		//pull the "Pedidos" list and if is required add a condition"
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		String pedidoseleccion = "SELECT * FROM ap_Admin.PEDIDOS";
 		
-		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES=1");
+		ArrayList<Client> pullClients = pullClients("WHERE ID_CLIENTES="+whereClient);
 		
 		if (where != null) {
 			pedidoseleccion.concat(where);
@@ -201,6 +205,7 @@ public class GestorBDD extends Conexion {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		sqlCommit();
 	}
 
 	public ArrayList<Client> pullClients(String where) {
@@ -249,6 +254,7 @@ public class GestorBDD extends Conexion {
 				+ "',REGISTRADO ='"+Client.getRegistrado()
 				+"' WHERE ID_CLIENTES = "+Client.getIdClient();
 		PreparedStatement stUpdateClientes;
+		
 		try {
 			stUpdateClientes = super.BBDDcon.prepareStatement(updateClientes);
 			ResultSet resultSet = stUpdateClientes.executeQuery();
@@ -258,7 +264,7 @@ public class GestorBDD extends Conexion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		sqlCommit();
 		
 		return false;
 		

@@ -98,8 +98,18 @@ public class LogDrive extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("logedEmpleado", empleado);
 
-				// a que jsp?
-				response.sendRedirect("ChooseProducts");
+				switch (empleado.getRol()) {
+				case "Gestor":
+					response.sendRedirect("ManagerPage");
+					break;
+				case "ap_Admin":
+					request.getRequestDispatcher("AdminPage.jsp").forward(request, response);
+					break;
+				default:
+					response.sendRedirect("ChooseProducts");
+					break;
+				}
+				
 			} else {
 
 				// enviar datos

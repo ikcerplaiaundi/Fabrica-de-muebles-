@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@page import="modelo.DAO.Empleado"%>
+ <%@page import="java.util.*" session="true" %>
+ <%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,12 @@
 <title>Manager Page</title>
 </head>
 <body>
-
+<%
+Empleado logedEmpleado =new Empleado();
+logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
+if(logedEmpleado != null){ %>
+<p>
+<% out.print(logedEmpleado.getNombreEmpleado());%> 
 	<div class="dropdown" id="menu-desplegable">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		Seleciona una tabla
@@ -25,6 +33,10 @@
 			<li><a class="dropdown-item" href="ProductsParts">Productos-piezas</a></li>
 		</ul>
 	</div>
-	
+	<%}else{ %>
+
+<a href="LogDrive">login or create</a>
+
+<%}%>
 </body>
 </html>
