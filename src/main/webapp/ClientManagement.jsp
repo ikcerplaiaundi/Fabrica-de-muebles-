@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"  href="style/SupplierStyle.css">
 <title>Insert title here</title>
 </head>
 <body style="width: 100vw">
@@ -17,9 +18,12 @@
 Empleado logedEmpleado =new Empleado();
 logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
 if(logedEmpleado != null){ %>
+<header class="col-md-12">
+<img src="style/logo1.webp" alt="Flowers in Chania">
 <p>
 <% out.print(logedEmpleado.getNombreEmpleado());%> 
 </p>
+</header>
 
 	<h1>Registrados</h1>
 		<c:forEach items="${clientesregistrados}" var="clientereg">

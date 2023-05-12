@@ -19,7 +19,7 @@ Empleado logedEmpleado =new Empleado();
 logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
 if(logedEmpleado != null){ %>
 <header class="col-md-12">
-<img src="style/iconousuario.webp" alt="Flowers in Chania">
+<img src="style/logo1.webp" alt="Flowers in Chania">
 <p>
 <% out.print(logedEmpleado.getNombreEmpleado());%> 
 </p>

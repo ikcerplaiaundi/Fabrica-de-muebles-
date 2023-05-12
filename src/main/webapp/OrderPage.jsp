@@ -15,6 +15,7 @@
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"  href="style/SupplierStyle.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -23,9 +24,12 @@
 Empleado logedEmpleado =new Empleado();
 logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
 if(logedEmpleado != null){ %>
+<header class="col-md-12">
+<img src="style/logo1.webp" alt="Flowers in Chania">
 <p>
 <% out.print(logedEmpleado.getNombreEmpleado());%> 
 </p>
+</header>
 	
 	<div class="Pedidos">
 	<h1>Pedidos</h1>
