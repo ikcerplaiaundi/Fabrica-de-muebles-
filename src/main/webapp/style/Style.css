@@ -1,5 +1,17 @@
 @charset "ISO-8859-1";
+*{
 
+font-family: "Lucida Console", "Courier New", monospace;}
+body{
+	background-color: #F4B183;
+}
+img {
+    float:left;
+  	
+  	padding: 5px;
+  	width: 50px;
+}
+p{font-size: 30px;}
 #menu-desplegable{
 	position:absolute;
 	top: 25vw;
