@@ -28,9 +28,6 @@ if(logedEmpleado != null){ %>
 			<li><a class="dropdown-item" href="OrderPage">Pedidos</a></li>
 			<li><a class="dropdown-item" href="ClientManagement">Clientes</a></li>
 			<li><a class="dropdown-item" href="SupplierPage">Proveedores</a></li>
-			<li><a class="dropdown-item" href="BillPage">Facturacion</a></li>
-			<li><a class="dropdown-item" href="ProductsEmployes">Productos-empleados</a></li>
-			<li><a class="dropdown-item" href="ProductsParts">Productos-piezas</a></li>
 		</ul>
 	</div>
 	<%}else{ %>
