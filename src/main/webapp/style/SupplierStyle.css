@@ -1,0 +1,35 @@
+@charset "ISO-8859-1";
+
+@media screen and (max-width: 500px) {
+		*{font-size: 1vw;}
+}
+*{font-size: 0.75vw;
+
+
+	
+font-family: "Lucida Console", "Courier New", monospace;}
+body{
+	background-color: #F4B183;
+}
+img {
+    float:left;
+  	
+  	padding: 5px;
+  	width: 50px;
+}
+p{font-size: 30px;}
+
+header{
+	background-color: #feedc7;
+	
+	height:50px;
+}
+
+form{
+	border:3px solid black;
+	background-color:#DFA67B;
+}
+lable{
+	padding:10px;
+	border-right:2px dotted black;
+}
