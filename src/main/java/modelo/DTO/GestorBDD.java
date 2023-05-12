@@ -10,6 +10,7 @@ import modelo.DAO.Client;
 import modelo.DAO.Empleado;
 import modelo.DAO.Pedido;
 import modelo.DAO.Producto;
+import modelo.DAO.Proveedor;
 
 public class GestorBDD extends Conexion {
 	public Boolean[] ChekUser(modelo.DAO.User user) {
@@ -346,4 +347,83 @@ public class GestorBDD extends Conexion {
 		
 	}
 	
+	
+	public ArrayList<Proveedor> pullProveedores(String where){
+		
+		ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+		String proveedoresseleccion = "SELECT * FROM ap_Admin.PROVEEDORES  ";
+		
+		if (where != null) {
+			proveedoresseleccion.concat(where);
+		}
+
+		try {
+			PreparedStatement pullProveed = super.BBDDcon.prepareStatement(proveedoresseleccion);
+			ResultSet resultSet = pullProveed.executeQuery();
+			
+			while(resultSet.next()) {
+				Proveedor proveedor = new Proveedor();
+				
+				proveedor.setDireccion(resultSet.getString(1));
+				proveedor.setCif(resultSet.getString(2));
+				proveedor.setTelefono(resultSet.getString(3));
+				proveedor.setNombre(resultSet.getString(4));
+				proveedor.setIdProveedor(resultSet.getInt(5));
+				
+				proveedores.add(proveedor);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		sqlCommit();
+		
+		return proveedores;
+	}
+
+	public void updateProveedor(Proveedor proveedor) {
+		
+		String updateProv = "UPDATE ap_Admin.PROVEEDORES SET DIRECCION_PROVEEDOR=?, CIF_PROVEEDOR=?, CONTACT_PROVEEDOR=?, NOMBRE_PROVEEDOR=? WHERE ID_PROVEEDOR=?";
+		
+		try {
+			
+			PreparedStatement updatedProv = super.BBDDcon.prepareStatement(updateProv);
+			
+			updatedProv.setString(1, proveedor.getDireccion());
+			updatedProv.setString(2, proveedor.getCif());
+			updatedProv.setString(3, proveedor.getTelefono());
+			updatedProv.setString(4, proveedor.getNombre());
+			
+			updatedProv.setInt(5, proveedor.getIdProveedor());
+			
+			updatedProv.execute();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		sqlCommit();
+	}
+	
+	public void pushProveedor(Proveedor proveedor) {
+		
+		String pushProve = "INSERT INTO ap_Admin.PROVEEDORES (DIRECCION_PROVEEDOR, CIF_PROVEEDOR, CONTACT_PROVEEDOR, NOMBRE_PROVEEDOR,ID_PROVEEDORES) VALUES (?,?,?,?,id_proveedores_seq.NEXTVAL)";
+		
+		try {
+			
+			PreparedStatement pushproveedor = super.BBDDcon.prepareStatement(pushProve);
+			
+			pushproveedor.setString(1, proveedor.getDireccion());
+			pushproveedor.setString(2, proveedor.getCif());
+			pushproveedor.setString(3, proveedor.getTelefono());
+			pushproveedor.setString(4, proveedor.getNombre());
+			
+			pushproveedor.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		sqlCommit();
+	}
 }
