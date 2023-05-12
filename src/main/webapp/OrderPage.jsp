@@ -57,6 +57,9 @@ if(logedEmpleado != null){ %>
 	<div class="PedidoNuevo">
 		<form action="CreateOrder" method="post">
 			
+			<label for="Idpedido">ID pedido</label>
+			<input type="text" id="Idpedido" name="Idpedido">
+			
 			<label for="Idcliente">ID cliente</label>
 			<input type="text" id="Idcliente" name="Idcliente">
 			

@@ -209,7 +209,7 @@ public class GestorBDD extends Conexion {
 
 	public void pushPedidos(Pedido pedido) {
 
-		String insertarPedido = "INSERT INTO pa_Admin.PEDIDOS SET FECHA_PEDIDO=?, ID_CLIENTES=?, DIRECCION_CLIENTES=?, COSTO_PEDIDO=?, ID_FACTURAS=?";
+		String insertarPedido = "INSERT INTO ap_Admin.PEDIDOS(ID_PEDIDOS,FECHA_PEDIDO, ID_CLIENTES, DIRECCION_CLIENTES, COSTO_PEDIDO, ID_FACTURAS) VALUES (?,?,?,?,?,?)";
 
 		Client client = new Client();
 		client = pedido.getClient();
@@ -217,11 +217,12 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement stinsertpedido = super.BBDDcon.prepareStatement(insertarPedido);
 
-			stinsertpedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
-			stinsertpedido.setInt(2, client.getIdClient());
-			stinsertpedido.setString(3, client.getDireccionClient());
-			stinsertpedido.setDouble(4, pedido.getCosto());
-			stinsertpedido.setInt(5, pedido.getIdFactura());
+			stinsertpedido.setInt(1, pedido.getIdPedido());
+			stinsertpedido.setDate(2, new Date(pedido.getFechaPedido().getTime()));
+			stinsertpedido.setInt(3, client.getIdClient());
+			stinsertpedido.setString(4, client.getDireccionClient());
+			stinsertpedido.setDouble(5, pedido.getCosto());
+			stinsertpedido.setInt(6, pedido.getIdFactura());
 
 			stinsertpedido.execute();
 

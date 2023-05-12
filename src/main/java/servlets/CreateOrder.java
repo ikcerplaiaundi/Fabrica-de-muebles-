@@ -51,7 +51,8 @@ public class CreateOrder extends HttpServlet {
 		int idfactura = Integer.parseInt(request.getParameter("Idfactura"));
 		double coste = Double.parseDouble(request.getParameter("Costo"));
 		String fecha = request.getParameter("fecha");
-
+		int idpedido = Integer.parseInt(request.getParameter("Idpedido"));
+		
 		client.setIdClient(idclient);
 		
 		gdbb.pullClienteViaId(client);
@@ -60,6 +61,7 @@ public class CreateOrder extends HttpServlet {
 		pedido.setIdFactura(idfactura);
 		pedido.setCosto(coste);
 		pedido.setFechaPedido(fecha);
+		pedido.setIdPedido(idpedido);
 		
 		gdbb.pushPedidos(pedido);
 		
