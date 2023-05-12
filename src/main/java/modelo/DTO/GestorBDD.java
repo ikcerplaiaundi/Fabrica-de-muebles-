@@ -342,4 +342,8 @@ public class GestorBDD extends Conexion {
 		}
 	}
 
+	public void updateProductos(ArrayList<Producto> productos) {
+		
+	}
+	
 }

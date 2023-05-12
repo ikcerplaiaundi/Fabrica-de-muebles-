@@ -40,14 +40,14 @@ public class BuyInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
 		double preciototal = 0;
-		if(productosCompra!=null) {
+		if (productosCompra != null) {
 			for (Producto producto : productosCompra) {
-				preciototal = preciototal + (producto.getPrecioProducto()*producto.getStockProducto());
+				preciototal = preciototal + (producto.getPrecioProducto() * producto.getStockProducto());
 			}
 		}
-		preciototal=Math.round(preciototal*100);
-		preciototal=preciototal/100;
-		
+		preciototal = Math.round(preciototal * 100);
+		preciototal = preciototal / 100;
+
 		session.setAttribute("preciototal", preciototal);
 		request.getRequestDispatcher("BuyInfo.jsp").forward(request, response);
 //		response.sendRedirect("");
@@ -62,22 +62,22 @@ public class BuyInfo extends HttpServlet {
 			throws ServletException, IOException {
 		GestorBDD gdbb = new GestorBDD();
 		HttpSession session = request.getSession();
-		Client cliente =new Client();
+		Client cliente = new Client();
 		Client logedClient = (Client) session.getAttribute("logedClient");
-		
-		if (logedClient != null) { //usuario logueado
+
+		if (logedClient != null) { // usuario logueado
 			logedClient.setDireccionClient(request.getParameter("Direccion"));
 			logedClient.setNombreClient(request.getParameter("name"));
 			logedClient.setContactoClient(request.getParameter("Contact"));
 			logedClient.setDniClient(request.getParameter("DNI"));
 			session.setAttribute("logedClient", logedClient);
-			cliente=logedClient;
+			cliente = logedClient;
 			gdbb.abrirConexion();
 			gdbb.updateCliente(logedClient);
 			gdbb.cerrarConexion();
-			
-		}else { //usuario no resgistrado
-			
+
+		} else { // usuario no resgistrado
+
 			cliente.setDireccionClient(request.getParameter("Direccion"));
 			cliente.setNombreClient(request.getParameter("name"));
 			cliente.setContactoClient(request.getParameter("Contact"));
@@ -88,7 +88,7 @@ public class BuyInfo extends HttpServlet {
 		}
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
 		gdbb.abrirConexion();
-		// comprar
+
 		gdbb.cerrarConexion();
 	}
 
