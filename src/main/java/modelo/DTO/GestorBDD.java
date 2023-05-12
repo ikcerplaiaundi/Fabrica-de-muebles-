@@ -211,7 +211,7 @@ public class GestorBDD extends Conexion {
 	public void pushPedidos(Pedido pedido) {
 
 		String insertarPedido = "INSERT INTO ap_Admin.PEDIDOS(ID_PEDIDOS,FECHA_PEDIDO, ID_CLIENTES, DIRECCION_CLIENTES, COSTO_PEDIDO, ID_FACTURAS) VALUES (id_pedidos_seq.NEXTVAL,?,?,?,?,?)";
-
+		String id_pedidos_seq = "SELECT id_pedidos_seq.CURRVAL FROM DUAL;";
 		Client client = new Client();
 		client = pedido.getClient();
 
@@ -226,7 +226,9 @@ public class GestorBDD extends Conexion {
 			stinsertpedido.setInt(5, pedido.getIdFactura());
 
 			stinsertpedido.execute();
-
+			PreparedStatement stid_pedidos_seq = super.BBDDcon.prepareStatement(id_pedidos_seq);
+			ResultSet resultSet=stid_pedidos_seq.executeQuery();
+			pedido.setIdPedido(resultSet.getInt(1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

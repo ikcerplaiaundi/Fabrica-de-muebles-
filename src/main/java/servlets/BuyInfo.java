@@ -90,7 +90,7 @@ public class BuyInfo extends HttpServlet {
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
 		Pedido pedido=new Pedido();
 		pedido.setClient(cliente);
-		pedido.setFechaPedido("2-3-2030");
+		pedido.setFechaPedido(request.getParameter("fecha"));
 		pedido.setCosto((double) session.getAttribute("preciototal"));
 		
 		
@@ -100,6 +100,7 @@ public class BuyInfo extends HttpServlet {
 		gdbb.pushPedidosProductos(pedido,productosCompra);
 		gdbb.lessStockProductos(productosCompra);
 		gdbb.cerrarConexion();
+		response.sendRedirect("BuyInfo");
 	}
 
 }

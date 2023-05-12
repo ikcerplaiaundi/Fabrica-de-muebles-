@@ -44,7 +44,8 @@ if(logedClient != null){ %>
 					<input type="text" id="DNI" name="DNI" required value="${logedClient.getDniClient()}"><br>
 					<label for="DireccionClient">Direccion</label>
 					<input type="text" id="Direccion" name="Direccion" required value="${logedClient.getDireccionClient()}"><br>
-					  
+					<label for="fecha">Fecha pedido</label>
+					<input type="date" id="fecha" name="fecha" value="${pedido.getFechaPedido()}">
 					<br>
 				
 				<input id="buy" type="submit" name="DatosPedido" value="confirmar compra"/>
