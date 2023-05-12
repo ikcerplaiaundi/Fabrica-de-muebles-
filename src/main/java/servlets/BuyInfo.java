@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.DAO.Client;
+import modelo.DAO.Pedido;
 import modelo.DAO.Producto;
 import modelo.DTO.GestorBDD;
 
@@ -87,8 +88,17 @@ public class BuyInfo extends HttpServlet {
 			gdbb.cerrarConexion();
 		}
 		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
+		Pedido pedido=new Pedido();
+		pedido.setClient(cliente);
+		pedido.setFechaPedido("2-3-2030");
+		pedido.setCosto((double) session.getAttribute("preciototal"));
+		
+		
+		
 		gdbb.abrirConexion();
-
+		gdbb.pushPedidos(pedido);
+		gdbb.pushPedidosProductos(pedido,productosCompra);
+		gdbb.lessStockProductos(productosCompra);
 		gdbb.cerrarConexion();
 	}
 

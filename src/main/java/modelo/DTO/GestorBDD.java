@@ -209,7 +209,7 @@ public class GestorBDD extends Conexion {
 
 	public void pushPedidos(Pedido pedido) {
 
-		String insertarPedido = "INSERT INTO ap_Admin.PEDIDOS(ID_PEDIDOS,FECHA_PEDIDO, ID_CLIENTES, DIRECCION_CLIENTES, COSTO_PEDIDO, ID_FACTURAS) VALUES (?,?,?,?,?,?)";
+		String insertarPedido = "INSERT INTO ap_Admin.PEDIDOS(ID_PEDIDOS,FECHA_PEDIDO, ID_CLIENTES, DIRECCION_CLIENTES, COSTO_PEDIDO, ID_FACTURAS) VALUES (id_pedidos_seq.NEXTVAL,?,?,?,?,?)";
 
 		Client client = new Client();
 		client = pedido.getClient();
@@ -217,12 +217,12 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement stinsertpedido = super.BBDDcon.prepareStatement(insertarPedido);
 
-			stinsertpedido.setInt(1, pedido.getIdPedido());
-			stinsertpedido.setDate(2, new Date(pedido.getFechaPedido().getTime()));
-			stinsertpedido.setInt(3, client.getIdClient());
-			stinsertpedido.setString(4, client.getDireccionClient());
-			stinsertpedido.setDouble(5, pedido.getCosto());
-			stinsertpedido.setInt(6, pedido.getIdFactura());
+		
+			stinsertpedido.setDate(1, new Date(pedido.getFechaPedido().getTime()));
+			stinsertpedido.setInt(2, client.getIdClient());
+			stinsertpedido.setString(3, client.getDireccionClient());
+			stinsertpedido.setDouble(4, pedido.getCosto());
+			stinsertpedido.setInt(5, pedido.getIdFactura());
 
 			stinsertpedido.execute();
 
@@ -318,14 +318,14 @@ public class GestorBDD extends Conexion {
 		}
 		return false;
 	}
-	
+
 	public void pullClienteViaId(Client client) {
 		// @param pull the "Cliente" specified "
 		String selectClientes = "SELECT * FROM ap_Admin.CLIENTES WHERE ID_CLIENTES=?";
 		try {
 			PreparedStatement mostrarUsuarios = super.BBDDcon.prepareStatement(selectClientes);
 			mostrarUsuarios.setInt(1, client.getIdClient());
-			
+
 			ResultSet resultSet = mostrarUsuarios.executeQuery();
 			resultSet.next();
 			// ID_CLIENTES DIRECCION_CLIENTES NOMBRE_CLIENTE CONTACTO_CLIENTE DNI_CLIENTE
@@ -342,8 +342,57 @@ public class GestorBDD extends Conexion {
 		}
 	}
 
-	public void updateProductos(ArrayList<Producto> productos) {
-		
+	public void lessStockProductos(ArrayList<Producto> productos) {
+		// *@param update "productos" table's row by id
+		for (Producto producto : productos) {
+
+			String updateString = "UPDATE ap_Admin.productos SET STOCK_PROD = (STOCK_PROD - ?) WHERE ID_productos = ?";
+
+			try {
+				PreparedStatement psProductos = super.BBDDcon.prepareStatement(updateString);
+
+				psProductos.setInt(1, producto.getStockProducto());
+				psProductos.setInt(2, producto.getIdProducto());
+
+				psProductos.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			sqlCommit();
+		}
 	}
-	
+
+	public void pushPedidosProductos(Pedido pedido, ArrayList<Producto> productosCompra) {
+		// *@param push how many of what products are in one "pedido" 
+		for (Producto producto : productosCompra) {
+			/*
+			 * CREATE TABLE productos_pedidos ( ID_productos NUMBER, ID_pedidos NUMBER ,
+			 * fecha_pedido date, stock_prod NUMBER, PRIMARY KEY ( ID_productos,
+			 * ID_pedidos,fecha_pedido) )TABLESPACE FabricaMuebles;
+			 */
+			String INSERTClientes = "INSERT INTO ap_Admin.PRODUCTOS_PEDIDOS (ID_productos, ID_pedidos, fecha_pedido, stock_prod)VALUES (?,?,?,?)";
+			PreparedStatement stINSERTPRODUCTOS_EMPEADOS;
+			try {
+				stINSERTPRODUCTOS_EMPEADOS = super.BBDDcon.prepareStatement(INSERTClientes);
+				stINSERTPRODUCTOS_EMPEADOS.setInt(1, producto.getIdProducto());
+				stINSERTPRODUCTOS_EMPEADOS.setInt(2, pedido.getIdPedido());
+				stINSERTPRODUCTOS_EMPEADOS.setDate(3, new Date(pedido.getFechaPedido().getTime()));
+				stINSERTPRODUCTOS_EMPEADOS.setInt(4, producto.getStockProducto());
+				
+				
+				
+				stINSERTPRODUCTOS_EMPEADOS.execute();
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+			sqlCommit();
+			
+			
+			
+		}
+
+	}
+
 }
