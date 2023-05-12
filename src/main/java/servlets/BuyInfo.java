@@ -100,7 +100,7 @@ public class BuyInfo extends HttpServlet {
 		gdbb.pushPedidosProductos(pedido,productosCompra);
 		gdbb.lessStockProductos(productosCompra);
 		gdbb.cerrarConexion();
-		response.sendRedirect("BuyInfo");
+		response.sendRedirect("ChooseProducts");
 	}
 
 }

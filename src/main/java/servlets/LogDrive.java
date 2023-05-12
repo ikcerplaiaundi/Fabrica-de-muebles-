@@ -42,6 +42,9 @@ public class LogDrive extends HttpServlet {
 		checkLogin(request, response, GDBB);
 
 		GDBB.cerrarConexion();
+		
+		
+		
 	}
 
 	private void checkLogin(HttpServletRequest request, HttpServletResponse response, modelo.DTO.GestorBDD GDBB)
