@@ -62,7 +62,7 @@ public class BuyInfo extends HttpServlet {
 			throws ServletException, IOException {
 		GestorBDD gdbb = new GestorBDD();
 		HttpSession session = request.getSession();
-		
+		Client cliente =new Client();
 		Client logedClient = (Client) session.getAttribute("logedClient");
 		
 		if (logedClient != null) { //usuario logueado
@@ -71,12 +71,13 @@ public class BuyInfo extends HttpServlet {
 			logedClient.setContactoClient(request.getParameter("Contact"));
 			logedClient.setDniClient(request.getParameter("DNI"));
 			session.setAttribute("logedClient", logedClient);
-			
+			cliente=logedClient;
 			gdbb.abrirConexion();
 			gdbb.updateCliente(logedClient);
 			gdbb.cerrarConexion();
+			
 		}else { //usuario no resgistrado
-			Client cliente =new Client();
+			
 			cliente.setDireccionClient(request.getParameter("Direccion"));
 			cliente.setNombreClient(request.getParameter("name"));
 			cliente.setContactoClient(request.getParameter("Contact"));
@@ -85,9 +86,10 @@ public class BuyInfo extends HttpServlet {
 			gdbb.pushCliente(cliente);
 			gdbb.cerrarConexion();
 		}
-		
-		
-		
+		ArrayList<Producto> productosCompra = (ArrayList<Producto>) session.getAttribute("productosCompra");
+		gdbb.abrirConexion();
+		// comprar
+		gdbb.cerrarConexion();
 	}
 
 }
