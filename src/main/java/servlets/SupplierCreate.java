@@ -47,6 +47,7 @@ public class SupplierCreate extends HttpServlet {
 		String contactProve = request.getParameter("contactoprov");
 		String nombreProve = request.getParameter("nombreprov");
 
+
 		proveedor.setDireccion(direccionProve);
 		proveedor.setCif(cifProve);
 		proveedor.setTelefono(contactProve);

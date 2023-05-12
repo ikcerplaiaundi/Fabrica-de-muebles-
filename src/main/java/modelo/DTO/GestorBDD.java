@@ -427,7 +427,7 @@ public class GestorBDD extends Conexion {
 	
 	public void pushProveedor(Proveedor proveedor) {
 		
-		String pushProve = "INSERT INTO ap_Admin.PROVEEDORES (DIRECCION_PROVEEDOR, CIF_PROVEEDOR, CONTACT_PROVEEDOR, NOMBRE_PROVEEDOR,ID_PROVEEDORES) VALUES (?,?,?,?,id_proveedores_seq.NEXTVAL)";
+		String pushProve = "INSERT INTO ap_Admin.PROVEEDORES (ID_PROVEEDORES, NOMBRE_PROVEEDOR, CONTACT_PROVEEDOR, CIF_PROVEEDOR,DIRECCION_PROVEEDOR) VALUES (id_proveedores_seq.NEXTVAL,?,?,?,?)";
 		
 		try {
 			
