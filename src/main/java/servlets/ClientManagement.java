@@ -24,14 +24,16 @@ public class ClientManagement extends HttpServlet {
      */
     public ClientManagement() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		//@param this method takes all the clients on the BBDD and insert them in 2 different arrays one with logged clients and unlogged ones. To then pass it to the JSP
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		GestorBDD gdbb = new GestorBDD();
@@ -53,8 +55,9 @@ public class ClientManagement extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	
+
+		//@param This method is called once you press modify on the JSP, take the client with the info modified and change it on the BBDD
+		
 		GestorBDD gdbb = new GestorBDD();
 		gdbb.abrirConexion();
 		

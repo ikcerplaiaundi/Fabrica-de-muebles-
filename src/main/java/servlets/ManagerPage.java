@@ -19,7 +19,7 @@ public class ManagerPage extends HttpServlet {
 	 */
 	public ManagerPage() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -29,6 +29,7 @@ public class ManagerPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//@param this method takes you to the manager page where you can select different management tables.
 		
 		request.getRequestDispatcher("ManagerPage.jsp").forward(request, response);
 	}

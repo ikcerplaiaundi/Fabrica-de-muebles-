@@ -22,14 +22,14 @@ public class SupplierCreate extends HttpServlet {
      */
     public SupplierCreate() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -37,6 +37,8 @@ public class SupplierCreate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//@param This method is called once you press the create input, and insert the supplier to the BBDD
 		
 		GestorBDD gdbb = new GestorBDD();
 		

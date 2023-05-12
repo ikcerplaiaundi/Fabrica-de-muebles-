@@ -24,15 +24,15 @@ public class SupplierPage extends HttpServlet {
      */
     public SupplierPage() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//@param This method takes supplier info from the BBDD and pass it to the JSP for display
 		
 		GestorBDD gdbb = new GestorBDD();
 		
@@ -51,6 +51,8 @@ public class SupplierPage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// @param this method is called once you press modify on the JSP, take the info from it and updates on the BBDD
 		
 		GestorBDD gdbb = new GestorBDD();
 		

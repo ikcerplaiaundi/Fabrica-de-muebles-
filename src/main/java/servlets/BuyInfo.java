@@ -28,7 +28,7 @@ public class BuyInfo extends HttpServlet {
 	 */
 	public BuyInfo() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class OrderPage extends HttpServlet {
 	 */
 	public OrderPage() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -34,8 +34,8 @@ public class OrderPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//@param This method take info from the BBDD of the orders, and takes it to the JSP for display
 
 		GestorBDD gdbb = new GestorBDD();
 
@@ -57,6 +57,8 @@ public class OrderPage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//@param This method is callled once you press the modify, it takes the info from the JSP and then update it on the BBDD
+		
 		GestorBDD gdbb = new GestorBDD();
 		gdbb.abrirConexion();
 
