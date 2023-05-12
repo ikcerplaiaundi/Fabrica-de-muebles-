@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"  href="style/SupplierStyle.css">
 <title>Supplier page</title>
 </head>
 <body>
@@ -17,13 +18,15 @@
 Empleado logedEmpleado =new Empleado();
 logedEmpleado = (Empleado) session.getAttribute("logedEmpleado");
 if(logedEmpleado != null){ %>
+<header class="col-md-12">
+<img src="style/iconousuario.webp" alt="Flowers in Chania">
 <p>
 <% out.print(logedEmpleado.getNombreEmpleado());%> 
 </p>
-
+</header>
 	<h1>Proveedores</h1>
 	
-		<c:forEach items="${proveedores}" var="provedor">
+		<c:forEach items="${Proveedores}" var="provedor">
 			<form method="post" action="SupplierPage">
 				<lable for="direccionprov">Direccion proveedor</lable>
 				<input type="text" id="direccionprov" name="direccionprov" value="${provedor.getDireccion()}">

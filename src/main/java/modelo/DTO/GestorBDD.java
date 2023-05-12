@@ -379,15 +379,15 @@ public class GestorBDD extends Conexion {
 		try {
 			PreparedStatement pullProveed = super.BBDDcon.prepareStatement(proveedoresseleccion);
 			ResultSet resultSet = pullProveed.executeQuery();
-			
+			Proveedor proveedor;
 			while(resultSet.next()) {
-				Proveedor proveedor = new Proveedor();
+				 proveedor = new Proveedor();
 				
-				proveedor.setDireccion(resultSet.getString(1));
-				proveedor.setCif(resultSet.getString(2));
+				proveedor.setIdProveedor(resultSet.getInt(1));
+				proveedor.setNombre(resultSet.getString(2));
 				proveedor.setTelefono(resultSet.getString(3));
-				proveedor.setNombre(resultSet.getString(4));
-				proveedor.setIdProveedor(resultSet.getInt(5));
+				proveedor.setCif(resultSet.getString(4));
+				proveedor.setDireccion(resultSet.getString(5));
 				
 				proveedores.add(proveedor);
 				

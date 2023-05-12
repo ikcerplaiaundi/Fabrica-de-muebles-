@@ -42,7 +42,7 @@ public class SupplierPage extends HttpServlet {
 		
 		gdbb.cerrarConexion();
 		
-		request.setAttribute("Proveedroes", proveedores);
+		request.setAttribute("Proveedores", proveedores);
 		request.getRequestDispatcher("SupplierPage.jsp").forward(request, response);
 		
 	}
